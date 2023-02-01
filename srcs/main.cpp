@@ -4,7 +4,14 @@
 int main()
 {
 	ft::vector<int> first;
+	std::cout << "default constructor: begin " << first.begin() << std::endl;
+	std::cout << "default constructor: size " << first.size() << std::endl;
 	ft::vector<int> second (4, 100);
+	std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
+	std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
+	for (size_t i = 0; i < second.size(); i++)
+		std::cout << *(second.begin() + i) << std::endl;
+	std::cout << "fill constructor : size " << second.size() << std::endl;
 	ft::vector<int> third (second.begin(), second.end());
 
 }

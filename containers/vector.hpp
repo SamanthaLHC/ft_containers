@@ -35,9 +35,9 @@ namespace ft {
 		// à ce moment là et qu'il aura besoin d'un .hpp ds lequel il y a la def du template
 
 		// default construct: empty container with default constructed allocator
-		vector():
-				_alloc(Allocator()), _n(0), _capacity(0), _first(NULL), _last(NULL),
-				_vector_array(NULL) {}
+		// vector():
+		// 		_alloc(Allocator()), _n(0), _capacity(0), _first(NULL), _last(NULL),
+		// 		_vector_array(NULL) {}
 
 		// default construct: empty container with default constructed allocator
 		vector (const allocator_type& alloc = Allocator()): 
@@ -48,12 +48,12 @@ namespace ft {
 		vector (size_type n, const T& val = T(), const Allocator& alloc = Allocator()):
 				_alloc(alloc), _n(n), _capacity(n), _first(NULL), _last(NULL)
 		{
-			_vector_array = _alloc.allocate(n);
+			this->_vector_array = this->_alloc.allocate(n);
 			// si allocate fail: une exception est jetée (try / catch ???)
 			if (_vector_array != NULL)
 			{
 				for (size_type i = 0; i < n; i++)
-					this->_alloc.construct(&_vector_array + i, val);
+					this->_alloc.construct(this->_vector_array + i, val);
 				this->_first = this->_vector_array;
 				this->_last = this->_first + n;
 			}
@@ -61,23 +61,34 @@ namespace ft {
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
 		// with each elem contuct from its corresponding elem in that range in the same order.s
-		template <class InputIterator>  
-		vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator())
-		{
-			//contains all the elements between first and last, 
-			//including the element pointed by first but not the element pointed by last.
-			this->_vector_array = std::copy(first, last + 1, &this->_vector_array);
-		}
+		// template <class InputIterator>
+		// vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator())
+		// {
+		// 	//contains all the elements between first and last, 
+		// 	//including the element pointed by first but not the element pointed by last.
+			
+		// 	this->_last = std::copy(first, &last + 1, this->&_vector_array);
+		// }
 
-		vector (const vector& cpy) : _
+		vector (const vector& cpy) :
+				_alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), _first(cpy._first),
+				_last(cpy._last), _vector_array(cpy._vector_array)
 		{
 			*this = cpy;
 		}
 
-// 		~vector()
-// 		{
-
-// 		}
+		~vector()
+		{
+			if (this->_vector_array != NULL)
+			{
+				for (size_type i = 0; i < this->_n; i++)
+				{
+					if (this->_vector_array[i])
+						this->_alloc.destroy(this->_vector_array + i);
+				}
+				this->_alloc.deallocate(this->_first, this->_n);
+			}
+		}
 
 // //______________Operator overload___________________________________________
 
@@ -99,17 +110,17 @@ namespace ft {
   
 		iterator begin()
 		{
-
+			return this->_first;
 		}
 // 		const_iterator begin() const
 // 		{
 
 // 		}
 
-// 		iterator end()
-// 		{
-
-// 		}
+		iterator end()
+		{
+			return this->_last;
+		}
 // 		const_iterator end() const
 // 		{
 
@@ -175,10 +186,10 @@ namespace ft {
 
 // //CAPACITY__________________________________________________________________
 
-// 		size_type size() const
-// 		{
-
-// 		}
+		size_type size() const
+		{
+			return this->_n;
+		}
 
 // 		size_type max_size() const
 // 		{
@@ -190,10 +201,10 @@ namespace ft {
 
 // 		}
 
-// 		size_type capacity() const
-// 		{
-
-// 		}
+		size_type capacity() const
+		{
+			return this->_capacity;
+		}
 
 // 		bool empty() const
 // 		{
@@ -280,12 +291,12 @@ namespace ft {
 		private:
 	//============//
 
-		Allocator	_alloc;
-		size_type	_n;
-		size_type	_capacity;
-		iterator	_first;
-		iterator	_last;
-		pointer		_vector_array;
+		Allocator		_alloc;
+		size_type const	_n;
+		size_type const	_capacity;
+		iterator		_first;
+		iterator		_last;
+		pointer			_vector_array;
 	};
 }
 
