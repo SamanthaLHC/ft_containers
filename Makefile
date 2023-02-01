@@ -5,13 +5,13 @@ NAME = ft_containers
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -MMD -g3 -Wall -Wextra -Werror -Weffc++ -std=c++98
+CXXFLAGS = -MMD -g3 -Wall -Wextra -Werror -std=c++98
 
 # **************************************************************************** #
-#    Source  & in                                                              #
+#    Sources  & includes                                                       #
 # **************************************************************************** #
 
-INCLUDE = -I./containers
+INCLUDE = -I containers
 
 SRCS_PATH = ./srcs/
 SRCS = $(addprefix $(SRCS_PATH), \
@@ -33,7 +33,7 @@ ${NAME}: ${OBJS}
 
 $(OBJ_PATH)%.o: $(SRCS_PATH)%.cpp
 	mkdir -p $(OBJ_PATH)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -rf ${OBJS} ${DEPS}
