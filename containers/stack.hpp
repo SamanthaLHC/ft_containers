@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/02 15:24:18 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:34:25 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,22 @@
 		typedef typename Container::reference			reference;
 		typedef typename Container::const_reference		const_reference;
 
-
 	//______________Constructors and destructor________________________
 
+	// à la fois costructeur par défaut et copy constructeur
 	// explicit stack (const container_type& ctnr = Container())
 	// {
-		
+
+	// }
+
+	// stack( const stack& cpy )
+	// {
+
 	// }
 
 	// ~stack()
 	// {
-		
+
 	// }
 
 	//______________Operator overload__________________________________
@@ -88,9 +93,7 @@
 	
 	// void pop()
 	// {
-		// 
 	// }
-
 	
 		protected:
 	
