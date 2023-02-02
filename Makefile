@@ -11,7 +11,7 @@ CXXFLAGS = -MMD -g3 -Wall -Wextra -Werror -std=c++98
 #    Sources  & includes                                                       #
 # **************************************************************************** #
 
-INCLUDE = -I containers
+INCLUDE = -I./containers -I./utils 
 
 SRCS_PATH = ./srcs/
 SRCS = $(addprefix $(SRCS_PATH), \

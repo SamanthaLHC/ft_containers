@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
+/*   Updated: 2023/02/02 14:48:22 by sle-huec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef _VECTOR_HPP
 #define _VECTOR_HPP
 
@@ -56,18 +68,18 @@ namespace ft {
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
 		// with each elem contuct from its corresponding elem in that range in the same order.s
-		template <class InputIterator>
-		vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator()):
-				_alloc(alloc), _n(0), _capacity(0), _first(first), _last(NULL)
-		{
-			//contains all the elements between first and last, 
-			//including the element pointed by first but not the element pointed by last.
+		// template <class InputIterator>
+		// vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator()):
+		// 		_alloc(alloc), _n(0), _capacity(0), _first(NULL), _last(NULL)
+		// {
+		// 	//contains all the elements between first and last, 
+		// 	//including the element pointed by first but not the element pointed by last.
 			
-			this->_last = std::copy(first, &last + 1, this->_vector_array);
-			size_t dist = std::distance(first, &last + 1);
-			this->_n = dist;
-			this->_capacity = dist + 1;
-		}
+		// 	this->_last = std::copy(first, &last + 1, this->_vector_array);
+		// 	size_t dist = std::distance(first, &last + 1);
+		// 	this->_n = dist;
+		// 	this->_capacity = dist + 1;
+		// }
 
 		vector (const vector& cpy) :
 				_alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), _first(cpy._first),

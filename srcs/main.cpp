@@ -1,8 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
+/*   Updated: 2023/02/02 14:49:30 by sle-huec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <vector.hpp>
 
 int main()
 {
+
+/*=============================================================================*/
+//							test vector 's constructors
+/*=============================================================================*/
+	
 	ft::vector<int> first;
 	std::cout << "default constructor: begin " << first.begin() << std::endl;
 	std::cout << "default constructor: size " << first.size() << std::endl;
@@ -12,23 +29,55 @@ int main()
 	for (size_t i = 0; i < second.size(); i++)
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
-	ft::vector<int> third (second.begin(), second.end());
+	// ft::vector<int> third (second.begin(), second.end());
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*=============================================================================*/
+//							main du sujet
+/*=============================================================================*/
+
 
 // #include <iostream>
 // #include <string>
 // #include <deque>
-// // #if 1 //CREATE A REAL STL EXAMPLE
-// // 	#include <map>
-// // 	#include <stack>
-// // 	#include <vector>
-// // 	namespace ft = std;
-// // else
-// // 	#include <map.hpp>
-// // 	#include <stack.hpp>
-// 	#include <vector.hpp>
-// // #endif
+// #if 1 //CREATE A REAL STL EXAMPLE
+// 	#include <map>
+// 	#include <stack>
+// 	#include <vector>
+// 	namespace ft = std;
+// else
+// 	#include <map.hpp>
+// 	#include <stack.hpp>
+	// #include <vector.hpp>
+// #endif
 
 // #include <stdlib.h>
 
