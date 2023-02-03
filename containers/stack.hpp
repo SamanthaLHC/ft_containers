@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/02 16:34:25 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:09:40 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 #define STACK_HPP
 
 #include <iostream>
-#include <utility>   // oiur std::move
 #include <memory>   // pour std::allocator
-#include <deque>
+#include "vector.hpp"
 
 	namespace ft {
 
-	template <class T, class Container = std::deque<T> >
+	template <class T, class Container = ft::vector<T> >
 	class stack 
 	{
 		public:
@@ -36,29 +35,20 @@
 	//______________Constructors and destructor________________________
 
 	// à la fois costructeur par défaut et copy constructeur
-	// explicit stack (const container_type& ctnr = Container())
-	// {
+	explicit stack (const container_type& ctnr = Container()) : c(ctnr) {}
 
-	// }
+	stack( const stack& cpy ) : c(cpy.c) {}
 
-	// stack( const stack& cpy )
-	// {
-
-	// }
-
-	// ~stack()
-	// {
-
-	// }
+	~stack() {}
 
 	//______________Operator overload__________________________________
 
-	// stack &operator=( const stack& other ): c(other.c)
-	// {
-	// 	if (this != other)
-	// 		this->c = std::move(other.c);
-	// 	return *this;
-	// }
+	stack &operator=( const stack& other )
+	{
+			if (this != &other)
+				c = other.c;
+			return *this;
+	}
 
 	//ELEMENT ACCES____________________________________________________
 
@@ -74,26 +64,27 @@
 	
 	//CAPACITY_________________________________________________________
 
-	// bool empty() const
-	// {
-		
-	// }
+	bool empty() const
+	{
+		return c.empty();
+	}
 	
-	//size_type size() const
-	// {
-		
-	// }
+	size_type size() const
+	{
+		return c.size();
+	}
 
 	//MOFIFIERS________________________________________________________
 
-	// void push( const value_type& value )
-	// {
-		
-	// }
+	void push( const value_type& value )
+	{
+			return c.push_back();
+	}
 	
-	// void pop()
-	// {
-	// }
+	void pop()
+	{
+			return c.pop_back();
+	}
 	
 		protected:
 	
@@ -103,42 +94,41 @@
 
 	//NON MEMBER FUNCTIONS____________________________________________________
 	
-	// template <class T, class Container>
+	template <class T, class Container>
+	bool operator==(const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x == y;
+	}
 	
-	// bool operator==(const stack<T, Container>& x,
+	template <class T, class Container>
+	bool operator< (const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x < y;
+	}
 	
-	// const stack<T, Container>& y);
+	template <class T, class Container>
+	bool operator!=(const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x != y;
+	}
 	
-	// template <class T, class Container>
+	template <class T, class Container>
+	bool operator> (const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x > y;
+	}
 	
-	// bool operator< (const stack<T, Container>& x,
+	template <class T, class Container>
+	bool operator>=(const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x >= y;
+	}
 	
-	// const stack<T, Container>& y);
-	
-	// template <class T, class Container>
-	
-	// bool operator!=(const stack<T, Container>& x,
-	
-	// const stack<T, Container>& y);
-	
-	// template <class T, class Container>
-	
-	// bool operator> (const stack<T, Container>& x,
-	
-	// const stack<T, Container>& y);
-	
-	// template <class T, class Container>
-	
-	// bool operator>=(const stack<T, Container>& x,
-	
-	// const stack<T, Container>& y);
-	
-	// template <class T, class Container>
-	
-	// bool operator<=(const stack<T, Container>& x,
-	
-	// const stack<T, Container>& y);
-	
+	template <class T, class Container>
+	bool operator<=(const stack<T, Container>& x, const stack<T, Container>& y)
+	{
+		return x <= y;
+	}
 		}
 
 #endif
