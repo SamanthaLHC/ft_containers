@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:49:47 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 16:01:00 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:34:27 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ namespace ft
 		const static T value = val;
 		typedef T 							value_type;
 		typedef integral_constant<T, val> 	type;
-		value_type							operator()()
+		value_type operator()()
 		{
 			return value;
 		}
