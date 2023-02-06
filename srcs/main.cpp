@@ -6,12 +6,13 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/02 14:49:30 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:33:18 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <vector.hpp>
+#include "../containers/vector.hpp"
+#include "integral_constant.hpp"
 
 int main()
 {
@@ -30,6 +31,12 @@ int main()
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 	// ft::vector<int> third (second.begin(), second.end());
+
+
+/*=============================================================================*/
+//							test traits types/objects
+/*=============================================================================*/
+
 
 }
 

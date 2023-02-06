@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enable_if.hpp                                      :+:      :+:    :+:   */
+/*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 14:18:12 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 16:15:46 by sle-huec         ###   ########.fr       */
+/*   Created: 2023/02/06 16:16:12 by sle-huec          #+#    #+#             */
+/*   Updated: 2023/02/06 16:35:46 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENABLE_IF_HPP
-#define ENABLE_IF_HPP
-
-namespace ft{
-
-template< bool B, class T = void >
-struct enable_if {};
+#ifndef IS_INTEGRAL_HPP
+#define IS_INTEGRAL_HPP
 
 
-template<class T>
-struct enable_if<true, T> { typedef T type; };
-}
 
 #endif

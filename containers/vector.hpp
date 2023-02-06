@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/02 14:48:22 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:35:05 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include "is_integral.hpp"
 
 namespace ft {
 
@@ -48,12 +49,11 @@ namespace ft {
 
 		// default construct: empty container with default constructed allocator
 		vector (const allocator_type& alloc = Allocator()): 
-				_alloc(alloc), _n(0), _capacity(0), _first(NULL), _last(NULL),
-				_vector_array(NULL) {}
+				_alloc(alloc), _n(0), _capacity(0), _vector_array(NULL) {}
 
 		// fill constructor: construct a container with n elements each one is a copy of val
 		vector (size_type n, const T& val = T(), const Allocator& alloc = Allocator()):
-				_alloc(alloc), _n(n), _capacity(n), _first(NULL), _last(NULL)
+				_alloc(alloc), _n(n), _capacity(n)
 		{
 			this->_vector_array = this->_alloc.allocate(n);
 			// si allocate fail: une exception est jetée (try / catch ???)
@@ -61,29 +61,27 @@ namespace ft {
 			{
 				for (size_type i = 0; i < n; i++)
 					this->_alloc.construct(this->_vector_array + i, val);
-				this->_first = this->_vector_array;
-				this->_last = this->_first + n;
 			}
 		}
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
 		// with each elem contuct from its corresponding elem in that range in the same order.s
-		// template <class InputIterator>
+		
+		// template <class InputIterator, typename = ft::enable_if<ft::is_integral<InputIterator>::value>>
 		// vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator()):
-		// 		_alloc(alloc), _n(0), _capacity(0), _first(NULL), _last(NULL)
+		// 		_alloc(alloc), _n(0), _capacity(0)
 		// {
 		// 	//contains all the elements between first and last, 
 		// 	//including the element pointed by first but not the element pointed by last.
 			
-		// 	this->_last = std::copy(first, &last + 1, this->_vector_array);
+		// 	std::copy(first, &last + 1, this->_vector_array);
 		// 	size_t dist = std::distance(first, &last + 1);
 		// 	this->_n = dist;
 		// 	this->_capacity = dist + 1;
 		// }
 
 		vector (const vector& cpy) :
-				_alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), _first(cpy._first),
-				_last(cpy._last), _vector_array(cpy._vector_array)
+				_alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), _vector_array(cpy._vector_array)
 		{
 			*this = cpy;
 		}
@@ -97,7 +95,7 @@ namespace ft {
 					if (this->_vector_array[i])
 						this->_alloc.destroy(this->_vector_array + i);
 				}
-				this->_alloc.deallocate(this->_first, this->_n);
+				this->_alloc.deallocate(this->_vector_array, this->_n);
 			}
 		}
 
@@ -121,7 +119,7 @@ namespace ft {
   
 		iterator begin()
 		{
-			return this->_first;
+			return this->_vector_array;
 		}
 // 		const_iterator begin() const
 // 		{
@@ -130,7 +128,7 @@ namespace ft {
 
 		iterator end()
 		{
-			return this->_last;
+			return this->_vector_array + this->_n;
 		}
 // 		const_iterator end() const
 // 		{
@@ -305,10 +303,12 @@ namespace ft {
 		Allocator		_alloc;
 		size_type const	_n;
 		size_type const	_capacity;
-		iterator		_first;
-		iterator		_last;
 		pointer			_vector_array;
 	};
+
+	// template <class Allocator>
+	// bool operator==(const vector<bool,Allocator>& x,const vector<bool,Allocator>& y)
+	// {}
 }
 
 #endif
