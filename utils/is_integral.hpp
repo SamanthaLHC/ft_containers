@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:16:12 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 17:34:34 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:09:45 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ namespace ft
 	{
 	};
 
-	template <>
-	struct is_integral<char16_t> : true_type
-	{
-	};
+	// template <>
+	// struct is_integral<char16_t> : true_type
+	// {
+	// };
 
-	template <>
-	struct is_integral<char32_t> : true_type
-	{
-	};
+	// template <>
+	// struct is_integral<char32_t> : true_type
+	// {
+	// };
 
 	template <>
 	struct is_integral<wchar_t> : true_type

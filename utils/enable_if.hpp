@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enable_if.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:12 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 17:28:15 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:45:02 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 namespace ft
 {
-
 	template <bool B, class T = void>
 	struct enable_if
 	{

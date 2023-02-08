@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 17:30:48 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/08 12:12:34 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <iostream>
 #include <memory> // pour std::allocator
-#include "vector.hpp"
+#include <vector.hpp>
+// #include "vector.hpp"
 
 namespace ft
 {
@@ -26,11 +27,11 @@ namespace ft
 	public:
 		//______________Member type________________________________________
 
-		typedef Container container_type;
-		typedef typename Container::value_type value_type;
-		typedef typename Container::size_type size_type;
-		typedef typename Container::reference reference;
-		typedef typename Container::const_reference const_reference;
+		typedef Container 								container_type;
+		typedef typename Container::value_type			value_type;
+		typedef typename Container::size_type			size_type;
+		typedef typename Container::reference			reference;
+		typedef typename Container::const_reference		const_reference;
 
 		//______________Constructors and destructor________________________
 

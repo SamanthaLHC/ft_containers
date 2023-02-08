@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/06 17:33:31 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:10:10 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 #include <iostream>
 #include <algorithm>
-#include "is_integral.hpp"
+#include <is_integral.hpp>
+// #include "is_integral.hpp"
 
 namespace ft
 {
 
-	template <class T, class Allocator = std::allocator<T>>
+	template <class T, class Allocator = std::allocator<T> >
 	class vector
 	{
 		//============//
@@ -65,20 +66,20 @@ namespace ft
 		}
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
-		// with each elem contuct from its corresponding elem in that range in the same order.s
+		// with each elem contuct from its corresponding elem in that range in the same order.
 
-		// template <class InputIterator, typename = ft::enable_if<ft::is_integral<InputIterator>::value>>
-		// vector (InputIterator first, InputIterator last, const Allocator& alloc = Allocator()):
-		// 		_alloc(alloc), _n(0), _capacity(0)
-		// {
-		// 	//contains all the elements between first and last,
-		// 	//including the element pointed by first but not the element pointed by last.
+		template <class InputIterator>
+		vector (typename ft::enable_if<ft::is_integral<InputIterator::value>, InputIterator::type first,
+		InputIterator last, const Allocator& alloc = Allocator()): _alloc(alloc), _n(0), _capacity(0)
+		{
+			//contains all the elements between first and last,
+			//including the element pointed by first but not the element pointed by last.
 
-		// 	std::copy(first, &last + 1, this->_vector_array);
-		// 	size_t dist = std::distance(first, &last + 1);
-		// 	this->_n = dist;
-		// 	this->_capacity = dist + 1;
-		// }
+			this->_vector_array = std::copy(first, &last + 1, this->_vector_array);
+			size_t dist = std::distance(first, &last + 1);
+			this->_n = dist;
+			this->_capacity = dist + 1;
+		}
 
 		vector(const vector &cpy) : _alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), 
 									_vector_array(cpy._vector_array)
@@ -298,10 +299,10 @@ namespace ft
 	private:
 		//============//
 
-		Allocator _alloc;
-		size_type const _n;
-		size_type const _capacity;
-		pointer _vector_array;
+		Allocator 			_alloc;
+		size_type const 	_n;
+		size_type const 	_capacity;
+		pointer				_vector_array;
 	};
 
 	// template <class Allocator>
