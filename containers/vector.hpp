@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/08 13:10:10 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/08 16:29:07 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <iostream>
 #include <algorithm>
 #include <is_integral.hpp>
+#include <enable_if.hpp>
+// #include "enable_if.hpp"
 // #include "is_integral.hpp"
 
 namespace ft
@@ -67,19 +69,30 @@ namespace ft
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
 		// with each elem contuct from its corresponding elem in that range in the same order.
+		//contains all the elements between first and last,
+		//including the element pointed by first but not the element pointed by last.
 
-		template <class InputIterator>
-		vector (typename ft::enable_if<ft::is_integral<InputIterator::value>, InputIterator::type first,
-		InputIterator last, const Allocator& alloc = Allocator()): _alloc(alloc), _n(0), _capacity(0)
-		{
-			//contains all the elements between first and last,
-			//including the element pointed by first but not the element pointed by last.
 
-			this->_vector_array = std::copy(first, &last + 1, this->_vector_array);
-			size_t dist = std::distance(first, &last + 1);
-			this->_n = dist;
-			this->_capacity = dist + 1;
-		}
+		//  inputiterator est un object complex, pour faire un range on a besoin d'un objet complex
+		// qui permet d'acceder à de la donnée d'un autre container. on s'assure avec enable _if
+		// que le type input iterator n'est pas un integral
+
+		// template <class InputIterator>
+		// vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
+		// 	InputIterator last,
+		// 	const allocator_type& alloc = allocator_type()): _alloc(alloc),
+		// 	// ces variables sont const, donc modifiables uniquement à la construction
+		// 		_n(std::distance(first, last)), _capacity(_n + 1)
+		// {
+		// 	this->_vector_array = this->_alloc.allocate(this->_n);
+
+		// 	std::cout << _n << std::endl;
+		// 	std::cout << _vector_array << std::endl;
+		// 	std::cout << first << std::endl;
+		// 	std::cout << last << std::endl;
+			
+		// 	this->_vector_array = std::copy(first, last, this->_vector_array);
+		// }
 
 		vector(const vector &cpy) : _alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), 
 									_vector_array(cpy._vector_array)
