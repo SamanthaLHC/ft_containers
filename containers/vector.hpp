@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 15:34:36 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 20:42:15 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <enable_if.hpp>
 // #include "enable_if.hpp"
 // #include "is_integral.hpp"
+// #include
 
 namespace ft
 {
@@ -40,10 +41,10 @@ namespace ft
 		typedef const T&										const_reference;
 		typedef typename Allocator::pointer 					pointer;
 		typedef typename Allocator::const_pointer 				const_pointer;
-		typedef T*												iterator;
+		// typedef ft::iterator									iterator;
 		typedef const T*										const_iterator;
-		typedef typename std::reverse_iterator<iterator>		reverse_iterator;
-		typedef typename std::reverse_iterator<const_iterator>	const_reverse_iterator;
+		// typedef typename ft::reverse_iterator<iterator>		reverse_iterator;
+		// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		//______________Constructors and destructor_________________________________
 
@@ -106,7 +107,7 @@ namespace ft
 			{
 				for (size_type i = 0; i < this->_n; i++)
 				{
-					if (this->_vector_array[i])
+					// if (this->_vector_array[i])
 						this->_alloc.destroy(this->_vector_array + i);
 				}
 				this->_alloc.deallocate(this->_vector_array, this->_n);
@@ -154,7 +155,7 @@ namespace ft
 
   		reverse_iterator rbegin()
   		{
-			return this->_vector_array + this->_n;
+			return 
 		}
 		const_reverse_iterator rbegin() const
 		{

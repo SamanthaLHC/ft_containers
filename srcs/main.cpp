@@ -6,11 +6,12 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 16:31:25 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 20:10:37 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 #include "../containers/vector.hpp"
 #include "../containers/stack.hpp"
 #include <vector>
@@ -30,9 +31,9 @@ int main()
 //							test vector 's constructors
 /*=============================================================================*/
 	
-	// vector<int> first;
-	// std::cout << "default constructor: begin " << first.begin() << std::endl;
-	// std::cout << "default constructor: size " << first.size() << std::endl;
+	vector<int> first;
+	std::cout << "default constructor: begin " << first.begin() << std::endl;
+	// // std::cout << "default constructor: size " << first.size() << std::endl;
 	// std::vector<int> second (4, 100);
 	// vector<int> second (4, 100);
 	// std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
@@ -56,9 +57,16 @@ int main()
 	// 	std::cout << *(forth.begin() + i) << std::endl;
 
 /*=============================================================================*/
-//							test iterators
+//							test iterators et elements acces
 /*=============================================================================*/
-
+	
+	vector<std::string> test_str;
+	test_str.push_back("pouet");
+	test_str.push_back("coucou");
+	test_str.push_back("youpi");
+	test_str.push_back("oley");
+	std::cout << "test iterators: " << *(test_str.rbegin()) << std::endl;
+	
 
 /*=============================================================================*/
 //							test capacity
