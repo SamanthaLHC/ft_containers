@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 16:28:21 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 16:31:25 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,63 +138,47 @@ int main()
 
 //_____________________________________-resize:
 
-std::cout << "=============================================================================" << std::endl;
-std::cout << "		test stack                                         " << std::endl;
-std::cout << "=============================================================================" << std::endl;
+// std::cout << "=============================================================================" << std::endl;
+// std::cout << "		test stack                                         " << std::endl;
+// std::cout << "=============================================================================" << std::endl;
 
-	stack<int> mystack;
+// // PROBLEME WITH COPY WITH ANOTHER CONTAINER !!!!!
 
-	for (int i=0; i<5; ++i) mystack.push(i);
-	std::cout << "Popping out elements...";
-	while (!mystack.empty())
-	{
-	   std::cout << ' ' << mystack.top();
-	   mystack.pop();
-	}
-	std::cout << '\n';
+// 	stack<int> mystack;
 
-	mystack.push(10);
-	mystack.push(20);
-	mystack.top() -= 5;
-	std::cout << "mystack.top() is after push: " << mystack.top() << '\n';
+// 	for (int i=0; i<5; ++i) mystack.push(i);
+// 	std::cout << "Popping out elements...";
+// 	while (!mystack.empty())
+// 	{
+// 	   std::cout << ' ' << mystack.top();
+// 	   mystack.pop();
+// 	}
+// 	std::cout << '\n';
 
-	stack<int> myints;
-	std::cout << "0. empty stack size: " << myints.size() << '\n';
+// 	mystack.push(10);
+// 	mystack.push(20);
+// 	mystack.top() -= 5;
+// 	std::cout << "mystack.top() is after push: " << mystack.top() << '\n';
 
-	for (int i=0; i<5; i++) myints.push(i);
-	std::cout << "1. size after push: " << myints.size() << '\n';
+// 	stack<int> myints;
+// 	std::cout << "0. empty stack size: " << myints.size() << '\n';
 
-	myints.pop();
-	std::cout << "2. size after pop: " << myints.size() << '\n';
-	vector<int> myvector (2,200);        // vector with 2 elements
-	std::cout << "size of myvector: " << myvector.size() << '\n';
-	stack<int,vector<int> > cpy (myvector);
-	std::cout << "size of stack cpy: " << cpy.size() << '\n';
+// 	for (int i=0; i<5; i++) myints.push(i);
+// 	std::cout << "1. size after push: " << myints.size() << '\n';
+
+// 	myints.pop();
+// 	std::cout << "2. size after pop: " << myints.size() << '\n';
+// 	vector<int> myvector (2,200);        // vector with 2 elements
+// 	std::cout << "size of myvector: " << myvector.size() << '\n';
+// 	stack<int,vector<int> > cpy (myvector);
+// 	std::cout << "size of stack cpy: " << cpy.size() << '\n';
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//__________________________________________________________________________________________________
 
 
 /*=============================================================================*/
