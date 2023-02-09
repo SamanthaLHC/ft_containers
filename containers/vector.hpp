@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 13:35:25 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 13:39:15 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,8 +314,14 @@ namespace ft
 
 		void clear()
 		{
-			for (size_type i = 0; i < this->_n; i++)
-				this->_alloc.destroy(this->_vector_array + i);
+			if (this->_vector_array != NULL)
+			{
+				for (size_type i = 0; i < this->_n; i++)
+				{
+					if (this->_vector_array[i])
+						this->_alloc.destroy(this->_vector_array + i);
+				}
+			}
 			this->_n = 0;
 		}
 
