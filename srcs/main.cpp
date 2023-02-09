@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/08 16:29:27 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 11:19:08 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,18 @@ int main()
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 	// ft::vector<int> third (second.begin(), second.end());
+	// std::cout << "range constructor : size " << third.size() << std::endl;
+	// for (size_t i = 0; i < third.size(); i++)
+	// 	std::cout << *(third.begin() + i) << std::endl;
 
+/*=============================================================================*/
+//							test operator=
+/*=============================================================================*/
+	
+	std::cout << "operator equal overload test: " << std::endl;
+	ft::vector<int> forth = second;
+	for (size_t i = 0; i < forth.size(); i++)
+		std::cout << *(forth.begin() + i) << std::endl;
 
 /*=============================================================================*/
 //							test traits types/objects
