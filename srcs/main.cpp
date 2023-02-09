@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 11:19:08 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 13:35:59 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int main()
 /*=============================================================================*/
 	
 	ft::vector<int> first;
-	std::cout << "default constructor: begin " << first.begin() << std::endl;
-	std::cout << "default constructor: size " << first.size() << std::endl;
+	// std::cout << "default constructor: begin " << first.begin() << std::endl;
+	// std::cout << "default constructor: size " << first.size() << std::endl;
 	ft::vector<int> second (4, 100);
-	std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
-	std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
-	for (size_t i = 0; i < second.size(); i++)
-		std::cout << *(second.begin() + i) << std::endl;
-	std::cout << "fill constructor : size " << second.size() << std::endl;
+	// std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
+	// std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
+	// for (size_t i = 0; i < second.size(); i++)
+	// 	std::cout << *(second.begin() + i) << std::endl;
+	// std::cout << "fill constructor : size " << second.size() << std::endl;
 	// ft::vector<int> third (second.begin(), second.end());
 	// std::cout << "range constructor : size " << third.size() << std::endl;
 	// for (size_t i = 0; i < third.size(); i++)
@@ -39,19 +39,96 @@ int main()
 //							test operator=
 /*=============================================================================*/
 	
-	std::cout << "operator equal overload test: " << std::endl;
+	// std::cout << "operator equal overload test: " << std::endl;
 	ft::vector<int> forth = second;
-	for (size_t i = 0; i < forth.size(); i++)
-		std::cout << *(forth.begin() + i) << std::endl;
+	// for (size_t i = 0; i < forth.size(); i++)
+	// 	std::cout << *(forth.begin() + i) << std::endl;
 
 /*=============================================================================*/
-//							test traits types/objects
+//							test iterators
 /*=============================================================================*/
+
+
+/*=============================================================================*/
+//							test capacity
+/*=============================================================================*/
+
+	// std::cout << "size : " << std::endl;
+	// std::cout << second.size() << std::endl;
+	// std::cout << "max size : " << std::endl;
+	// std::cout << second.max_size() << std::endl;
+	// std::cout << "capacity : " << std::endl;
+	// std::cout << second.capacity() << std::endl;
+	// std::cout << "empty default constructor empty bool : " << std::endl;
+	// std::cout << first.empty() << std::endl;
+	// std::cout << "not empty bool : " << std::endl;
+	// std::cout << second.empty() << std::endl;
+
+/*=============================================================================*/
+//							test modifier
+/*=============================================================================*/
+
+//___________________________________-pop_back:
+
+	// std::cout << "test pop back:" << std::endl;
+	// std::cout << "size before pop: " << second.size() << std::endl;
+	// second.pop_back();
+	// for (size_t i = 0; i < second.size(); i++)
+	// 	std::cout << *(second.begin() + i) << std::endl;
+	// std::cout << "size after pop: " << second.size() << std::endl;
+
+//___________________________________-push_back:
+
+
+//___________________________________-clear:
+
+//                !!!!!!!!!!!!!!!!!!!  FAIIIIILLLL
+
+	// std::cout << "test clear: print vector before clearing: " << std::endl;
+	// for (size_t i = 0; i < forth.size(); i++)
+	// 	std::cout << *(forth.begin() + i) << std::endl;
+	// forth.clear();
+	// std::cout << "clear done: can't print tab" << std::endl;
+	// for (size_t i = 0; i < forth.size(); i++)
+	// 	std::cout << *(forth.begin() + i) << std::endl;
+	// std::cout << "size: " << forth.size() << std::endl;
+	// std::cout << "first elem: " << *forth.begin() << std::endl;
+
+	
+//___________________________________-reserve:
+
+	// std::cout << "test reserve:" << std::endl;
+
+//   ft::vector<int>::size_type sz;
+
+//   ft::vector<int> foo;
+//   sz = foo.capacity();
+//   std::cout << "making foo grow:\n";
+//   for (int i=0; i<100; ++i) {
+//     foo.push_back(i);
+//     if (sz!=foo.capacity()) {
+//       sz = foo.capacity();
+//       std::cout << "capacity changed: " << sz << '\n';
+//     }
+//   }
+
+//   ft::vector<int> bar;
+//   sz = bar.capacity();
+//   bar.reserve(100);   // this is the only difference with foo above
+//   std::cout << "making bar grow:\n";
+//   for (int i=0; i<100; ++i) {
+//     bar.push_back(i);
+//     if (sz!=bar.capacity()) {
+//       sz = bar.capacity();
+//       std::cout << "capacity changed: " << sz << '\n';
+//     }
+//   }
+
+//_____________________________________-resize:
+
 
 
 }
-
-
 
 
 

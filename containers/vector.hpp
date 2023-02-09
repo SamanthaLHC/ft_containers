@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 11:55:59 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 13:35:25 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,35 +212,45 @@ namespace ft
 
 // //CAPACITY__________________________________________________________________
 
-size_type size() const
-{
-	return this->_n;
-}
+		size_type size() const
+		{
+			return this->_n;
+		}
 
-// 		size_type max_size() const
-// 		{
+		size_type max_size() const
+		{
+			return this->_alloc.max_size();
+		}
 
-// 		}
+		// void resize (size_type n, value_type val = value_type())
+		// {
 
-// 		void resize (size_type n, value_type val = value_type())
-// 		{
-
-// 		}
+		// }
 
 		size_type capacity() const
 		{
 			return this->_capacity;
 		}
 
-// 		bool empty() const
-// 		{
+		bool empty() const
+		{
+			return this->_n == 0;
+		}
 
-// 		}
-
-// 		void reserve (size_type n)
-// 		{
-
-// 		}
+		void reserve (size_type n)
+		{
+			if (n > max_size())
+				throw std::length_error("MESSAGE A MODIFIER APRES VERIF");
+			if (n > this->_capacity)
+			{
+				pointer tmp_arr = this->_alloc.allocate(n);
+				for (size_type i = 0; i < this->_n; i++)
+					this->_alloc.construct(tmp_arr + i, this->_vector_array[i]);
+				this->_vector_array.clear();
+				this->_vector_array = tmp_arr;
+			}
+			this->_capacity = n;
+		}
 
 		// //MODIFIERS_________________________________________________________________
 
@@ -257,15 +267,16 @@ size_type size() const
 
 // 		}
 
-// 		void push_back (const value_type& val)
-// 		{
+		void push_back (const value_type& val)
+		{
 
-// 		}
+		}
 
-// 		void pop_back()
-// 		{
-
-// 		}
+		void pop_back()
+		{
+			this->_alloc.destroy(this->end() - 2);
+			this->_n--;
+		}
 
 // 		//single elem
 // 		iterator insert (iterator position, const value_type& val)
@@ -301,10 +312,12 @@ size_type size() const
 
 // 		}
 
-// 		void clear()
-// 		{
-
-// 		}
+		void clear()
+		{
+			for (size_type i = 0; i < this->_n; i++)
+				this->_alloc.destroy(this->_vector_array + i);
+			this->_n = 0;
+		}
 
 // //ALLOC_____________________________________________________________________
 
