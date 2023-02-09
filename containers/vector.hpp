@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 13:46:18 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 14:21:41 by samantha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,11 @@ namespace ft
 				pointer tmp_arr = this->_alloc.allocate(n);
 				for (size_type i = 0; i < this->_n; i++)
 					this->_alloc.construct(tmp_arr + i, this->_vector_array[i]);
-				this->_vector_array.clear();
+				for (size_type i = 0; i < this->_n; i++)
+				{
+					if (this->_vector_array[i])
+						this->_alloc.destroy(this->_vector_array + i);
+				}
 				this->_vector_array = tmp_arr;
 			}
 			this->_capacity = n;

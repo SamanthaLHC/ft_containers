@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 13:45:29 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 14:28:29 by samantha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../containers/vector.hpp"
+#include <vector>
 #include "integral_constant.hpp"
+
+using namespace ft;
 
 int main()
 {
@@ -21,10 +24,10 @@ int main()
 //							test vector 's constructors
 /*=============================================================================*/
 	
-	ft::vector<int> first;
+	vector<int> first;
 	// std::cout << "default constructor: begin " << first.begin() << std::endl;
 	// std::cout << "default constructor: size " << first.size() << std::endl;
-	ft::vector<int> second (4, 100);
+	vector<int> second (4, 100);
 	// std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
 	// std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
 	// for (size_t i = 0; i < second.size(); i++)
@@ -40,7 +43,7 @@ int main()
 /*=============================================================================*/
 	
 	// std::cout << "operator equal overload test: " << std::endl;
-	ft::vector<int> forth = second;
+	vector<int> forth = second;
 	// for (size_t i = 0; i < forth.size(); i++)
 	// 	std::cout << *(forth.begin() + i) << std::endl;
 
@@ -79,27 +82,26 @@ int main()
 
 //___________________________________-push_back:
 
-	std::cout << "test push back:" << std::endl;
-	std::cout << "size before push: " << second.size() << std::endl;
-	second.push_back(56);
-	for (size_t i = 0; i < second.size(); i++)
-		std::cout << *(second.begin() + i) << std::endl;
-	std::cout << "size after push: " << second.size() << std::endl;
+	// std::cout << "test push back:" << std::endl;
+	// std::cout << "size before push: " << second.size() << std::endl;
+	// second.push_back(56);
+	// for (size_t i = 0; i < second.size(); i++)
+	// 	std::cout << *(second.begin() + i) << std::endl;
+	// std::cout << "size after push: " << second.size() << std::endl;
 
 //___________________________________-clear:
 
 //                !!!!!!!!!!!!!!!!!!!  FAIIIIILLLL
 
-	// std::cout << "test clear: print vector before clearing: " << std::endl;
-	// for (size_t i = 0; i < forth.size(); i++)
-	// 	std::cout << *(forth.begin() + i) << std::endl;
-	// forth.clear();
-	// std::cout << "clear done: can't print tab" << std::endl;
-	// for (size_t i = 0; i < forth.size(); i++)
-	// 	std::cout << *(forth.begin() + i) << std::endl;
-	// std::cout << "size: " << forth.size() << std::endl;
-	// std::cout << "first elem: " << *forth.begin() << std::endl;
-
+	std::cout << "test clear: print vector before clearing: " << std::endl;
+	for (size_t i = 0; i < forth.size(); i++)
+		std::cout << *(forth.begin() + i) << std::endl;
+	forth.clear();
+	std::cout << "clear done: can't print tab" << std::endl;
+	for (size_t i = 0; i < forth.size(); i++)
+		std::cout << *(forth.begin() + i) << std::endl;
+	std::cout << "size: " << forth.size() << std::endl;
+	std::cout << "begin is end : " <<  (forth.begin() == forth.end()) << std::endl;
 	
 //___________________________________-reserve:
 
