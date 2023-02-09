@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 10:46:24 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 16:11:58 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 namespace ft
 {
 
-	template <class T, class Container = ft::vector<T>>
+	template <class T, class Container = ft::vector<T> >
 	class stack
 	{
 	public:
@@ -36,7 +36,7 @@ namespace ft
 		//______________Constructors and destructor________________________
 
 		// à la fois costructeur par défaut et copy constructeur
-		explicit stack(const container_type &ctnr = Container()) : c(ctnr) {}
+		explicit stack(const container_type &ctnr = Container()): c(ctnr) {}
 
 		stack(const stack &cpy) : c(cpy.c) {}
 
@@ -53,15 +53,15 @@ namespace ft
 
 		// ELEMENT ACCES____________________________________________________
 
-		// value_type& top()
-		// {
+		value_type& top()
+		{
+			return c.back();
+		}
 
-		// }
-
-		// const value_type& top() const
-		// {
-
-		// }
+		const value_type& top() const
+		{
+			return c.back();
+		}
 
 		// CAPACITY_________________________________________________________
 
@@ -79,7 +79,7 @@ namespace ft
 
 		void push(const value_type &value)
 		{
-			return c.push_back();
+			return c.push_back(value);
 		}
 
 		void pop()

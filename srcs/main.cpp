@@ -3,37 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 14:28:29 by samantha         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:28:21 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "../containers/vector.hpp"
+#include "../containers/stack.hpp"
 #include <vector>
+#include <deque>
+#include <stack>
 #include "integral_constant.hpp"
 
-using namespace ft;
-
+	using namespace ft;
+	
 int main()
 {
 
+// std::cout << "=============================================================================" << std::endl;
+// std::cout << "			test vector                                        " << std::endl;
+// std::cout << "=============================================================================" << std::endl;
 /*=============================================================================*/
 //							test vector 's constructors
 /*=============================================================================*/
 	
-	vector<int> first;
+	// vector<int> first;
 	// std::cout << "default constructor: begin " << first.begin() << std::endl;
 	// std::cout << "default constructor: size " << first.size() << std::endl;
-	vector<int> second (4, 100);
+	// std::vector<int> second (4, 100);
+	// vector<int> second (4, 100);
 	// std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
 	// std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
 	// for (size_t i = 0; i < second.size(); i++)
 	// 	std::cout << *(second.begin() + i) << std::endl;
 	// std::cout << "fill constructor : size " << second.size() << std::endl;
-	// ft::vector<int> third (second.begin(), second.end());
+	// vector<int> third (second.begin(), second.end());
 	// std::cout << "range constructor : size " << third.size() << std::endl;
 	// for (size_t i = 0; i < third.size(); i++)
 	// 	std::cout << *(third.begin() + i) << std::endl;
@@ -43,7 +50,8 @@ int main()
 /*=============================================================================*/
 	
 	// std::cout << "operator equal overload test: " << std::endl;
-	vector<int> forth = second;
+	// std::vector<int> forth = second;
+	// vector<int> forth = second;
 	// for (size_t i = 0; i < forth.size(); i++)
 	// 	std::cout << *(forth.begin() + i) << std::endl;
 
@@ -71,71 +79,97 @@ int main()
 //							test modifier
 /*=============================================================================*/
 
-//___________________________________-pop_back:
+// ___________________________________-pop_back:
 
-	// std::cout << "test pop back:" << std::endl;
-	// std::cout << "size before pop: " << second.size() << std::endl;
-	// second.pop_back();
-	// for (size_t i = 0; i < second.size(); i++)
-	// 	std::cout << *(second.begin() + i) << std::endl;
-	// std::cout << "size after pop: " << second.size() << std::endl;
+// 	std::cout << "test pop back:" << std::endl;
+// 	std::cout << "size before pop: " << second.size() << std::endl;
+// 	second.pop_back();
+// 	for (size_t i = 0; i < second.size(); i++)
+// 		std::cout << *(second.begin() + i) << std::endl;
+// 	std::cout << "size after pop: " << second.size() << std::endl;
 
-//___________________________________-push_back:
+// ___________________________________-push_back:
 
-	// std::cout << "test push back:" << std::endl;
-	// std::cout << "size before push: " << second.size() << std::endl;
-	// second.push_back(56);
-	// for (size_t i = 0; i < second.size(); i++)
-	// 	std::cout << *(second.begin() + i) << std::endl;
-	// std::cout << "size after push: " << second.size() << std::endl;
+// 	std::cout << "test push back:" << std::endl;
+// 	std::cout << "size before push: " << second.size() << std::endl;
+// 	second.push_back(56);
+// 	for (size_t i = 0; i < second.size(); i++)
+// 		std::cout << *(second.begin() + i) << std::endl;
+// 	std::cout << "size after push: " << second.size() << std::endl;
 
-//___________________________________-clear:
+// ___________________________________-clear:
 
-//                !!!!!!!!!!!!!!!!!!!  FAIIIIILLLL
-
-	std::cout << "test clear: print vector before clearing: " << std::endl;
-	for (size_t i = 0; i < forth.size(); i++)
-		std::cout << *(forth.begin() + i) << std::endl;
-	forth.clear();
-	std::cout << "clear done: can't print tab" << std::endl;
-	for (size_t i = 0; i < forth.size(); i++)
-		std::cout << *(forth.begin() + i) << std::endl;
-	std::cout << "size: " << forth.size() << std::endl;
-	std::cout << "begin is end : " <<  (forth.begin() == forth.end()) << std::endl;
+// 	std::cout << "test clear: print vector before clearing: " << std::endl;
+// 	for (size_t i = 0; i < forth.size(); i++)
+// 		std::cout << *(forth.begin() + i) << std::endl;
+// 	forth.clear();
+// 	std::cout << "clear done: can't print tab" << std::endl;
+// 	for (size_t i = 0; i < forth.size(); i++)
+// 		std::cout << *(forth.begin() + i) << std::endl;
+// 	std::cout << "size: " << forth.size() << std::endl;
+// 	std::cout << "begin is end : " <<  (forth.begin() == forth.end()) << std::endl;
 	
-//___________________________________-reserve:
+// ___________________________________-reserve:
 
-	// std::cout << "test reserve:" << std::endl;
-
-//   ft::vector<int>::size_type sz;
-
-//   ft::vector<int> foo;
-//   sz = foo.capacity();
-//   std::cout << "making foo grow:\n";
-//   for (int i=0; i<100; ++i) {
-//     foo.push_back(i);
-//     if (sz!=foo.capacity()) {
-//       sz = foo.capacity();
-//       std::cout << "capacity changed: " << sz << '\n';
-//     }
-//   }
-
-//   ft::vector<int> bar;
-//   sz = bar.capacity();
-//   bar.reserve(100);   // this is the only difference with foo above
-//   std::cout << "making bar grow:\n";
-//   for (int i=0; i<100; ++i) {
-//     bar.push_back(i);
-//     if (sz!=bar.capacity()) {
-//       sz = bar.capacity();
-//       std::cout << "capacity changed: " << sz << '\n';
-//     }
-//   }
+// 	std::cout << "test reserve:" << std::endl;
+// 	std::cout << "capacity: " << forth.capacity() << std::endl;
+// 	forth.reserve(100);
+// 	std::cout << "capacity: " << forth.capacity() << std::endl;
+// 	try
+// 	{
+// 		size_t msz = forth.max_size() + 100;
+// 		forth.reserve(msz);
+// 	}cytus  ost) << '\n';
+// 	}
+// 	vector<int>::size_type sz;
+// 	vector<int> bar;
+//  	sz = bar.capacity();
+// 	bar.reserve(10);
+// 	std::cout << "making bar grow:\n";
+// 	for (int i=0; i<10; ++i)
+// 	{
+// 		bar.push_back(i);
+// 		if (sz!=bar.capacity()) 
+// 		{
+// 	    	sz = bar.capacity();
+// 	    	std::cout << "capacity changed: " << sz << '\n';
+// 		}
+// 	}
 
 //_____________________________________-resize:
 
+std::cout << "=============================================================================" << std::endl;
+std::cout << "		test stack                                         " << std::endl;
+std::cout << "=============================================================================" << std::endl;
 
+	stack<int> mystack;
 
+	for (int i=0; i<5; ++i) mystack.push(i);
+	std::cout << "Popping out elements...";
+	while (!mystack.empty())
+	{
+	   std::cout << ' ' << mystack.top();
+	   mystack.pop();
+	}
+	std::cout << '\n';
+
+	mystack.push(10);
+	mystack.push(20);
+	mystack.top() -= 5;
+	std::cout << "mystack.top() is after push: " << mystack.top() << '\n';
+
+	stack<int> myints;
+	std::cout << "0. empty stack size: " << myints.size() << '\n';
+
+	for (int i=0; i<5; i++) myints.push(i);
+	std::cout << "1. size after push: " << myints.size() << '\n';
+
+	myints.pop();
+	std::cout << "2. size after pop: " << myints.size() << '\n';
+	vector<int> myvector (2,200);        // vector with 2 elements
+	std::cout << "size of myvector: " << myvector.size() << '\n';
+	stack<int,vector<int> > cpy (myvector);
+	std::cout << "size of stack cpy: " << cpy.size() << '\n';
 }
 
 

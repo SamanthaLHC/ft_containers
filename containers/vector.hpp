@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 14:21:41 by samantha         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:34:36 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,43 +172,47 @@ namespace ft
 
 // //ELEMENT ACCES_____________________________________________________________
 
-// 		reference operator[] (size_type n)
-// 		{
+		reference operator[] (size_type n)
+		{
+			return this->_vector_array[n];
+		}
+		const_reference operator[] (size_type n) const
+		{
+			return this->_vector_array[n];
+		}
 
-// 		}
-// 		const_reference operator[] (size_type n) const
-// 		{
+		reference at (size_type n)
+		{
+			if (n > this->_n)
+				throw std::out_of_range("out of range exception");
+			return (this->_vector_array[n]);
+		}
 
-// 		}
+		const_reference at (size_type n) const
+		{
+			if (n > this->_n)
+				throw std::out_of_range("out of range exception");
+			return (this->_vector_array[n]);
+		}
 
-// 		reference at (size_type n)
-// 		{
+		reference front()
+		{
+			return *begin();
+		}
 
-// 		}
+		const_reference front() const
+		{
+			return *begin();
+		}
 
-// 		const_reference at (size_type n) const
-// 		{
-
-// 		}
-
-// 		reference front()
-// 		{
-
-// 		}
-
-// 		const_reference front() const
-// 		{
-
-// 		}
-
-// 		reference back()
-// 		{
-
-// 		}
-// 		const_reference back() const
-// 		{
-
-// 		}
+		reference back()
+		{
+			return *(end() - 1);
+		}
+		const_reference back() const
+		{
+			return *(end() - 1);
+		}
 
 // //CAPACITY__________________________________________________________________
 
@@ -240,7 +244,7 @@ namespace ft
 		void reserve (size_type n)
 		{
 			if (n > max_size())
-				throw std::length_error("MESSAGE A MODIFIER APRES VERIF");
+				throw std::length_error("length_error: vector::reserve");
 			if (n > this->_capacity)
 			{
 				pointer tmp_arr = this->_alloc.allocate(n);
