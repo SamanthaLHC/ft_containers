@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 13:39:15 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 13:46:18 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,14 @@ namespace ft
 
 		void push_back (const value_type& val)
 		{
-
+			if (this->_capacity == 0)
+				reserve(1);
+			else
+			{
+				reserve(this->_n + 1);
+				this->_alloc.construct(this->_vector_array + _n, val);
+			}
+			this->_n++;
 		}
 
 		void pop_back()
@@ -337,8 +344,8 @@ namespace ft
 //============//
 
 		Allocator 			_alloc;
-		size_type        	_n;
-		size_type        	_capacity;
+		size_type			_n;
+		size_type			_capacity;
 		pointer				_vector_array;
 	};
 

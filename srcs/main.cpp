@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 13:35:59 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/09 13:45:29 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ int main()
 
 //___________________________________-push_back:
 
+	std::cout << "test push back:" << std::endl;
+	std::cout << "size before push: " << second.size() << std::endl;
+	second.push_back(56);
+	for (size_t i = 0; i < second.size(); i++)
+		std::cout << *(second.begin() + i) << std::endl;
+	std::cout << "size after push: " << second.size() << std::endl;
 
 //___________________________________-clear:
 
