@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/09 20:42:15 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/10 14:52:45 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
 		typedef typename Allocator::pointer 					pointer;
 		typedef typename Allocator::const_pointer 				const_pointer;
 		// typedef ft::iterator									iterator;
-		typedef const T*										const_iterator;
+		// typedef const T*										const_iterator;
 		// typedef typename ft::reverse_iterator<iterator>		reverse_iterator;
 		// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
