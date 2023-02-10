@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/10 14:45:17 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:04:59 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include <iostream>
 #include <memory> // pour std::allocator
 #include <vector.hpp>
+#include <vector>
 // #include "vector.hpp"
 
 namespace ft
 {
-
-	template <class T, class Container = ft::vector<T> >
+	template <class T, class Container = std::vector<T> >
 	class stack
 	{
 	public:
@@ -88,6 +88,7 @@ namespace ft
 		}
 
 	protected:
+		//objet membre
 		Container c;
 	};
 
