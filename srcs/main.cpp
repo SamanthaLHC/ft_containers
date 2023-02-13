@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/10 14:46:11 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:04:22 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int main()
 	test_str.push_back("coucou");
 	test_str.push_back("youpi");
 	test_str.push_back("oley");
-	std::cout << "test iterators: " << *(test_str.rbegin()) << std::endl;
+	std::cout << "test iterators rbegin: " << *(test_str.rbegin()) << std::endl;
+	std::cout << "test iterators rbegin: " << *(test_str.rbegin() + 1) << std::endl;
 	
 
 /*=============================================================================*/

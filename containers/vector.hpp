@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/10 17:02:37 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:55:17 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include <iostream>
 #include <algorithm>
 #include <is_integral.hpp>
+// #include <reverse_iterator.hpp>
 #include <enable_if.hpp>
 // #include "enable_if.hpp"
+#include "../iterators/reverse_iterator.hpp"
 // #include "is_integral.hpp"
 // #include
 
@@ -41,10 +43,10 @@ namespace ft
 		typedef const T&										const_reference;
 		typedef typename Allocator::pointer 					pointer;
 		typedef typename Allocator::const_pointer 				const_pointer;
-		// typedef ft::iterator									iterator;
-		// typedef const T*										const_iterator;
-		// typedef typename ft::reverse_iterator<iterator>		reverse_iterator;
-		// typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef T*												iterator;
+		typedef const T*										const_iterator;
+		typedef typename ft::reverse_iterator<iterator>		reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		//______________Constructors and destructor_________________________________
 
@@ -155,7 +157,8 @@ namespace ft
 
   		reverse_iterator rbegin()
   		{
-			return 
+			reverse_iterator iter(end());
+			return iter;
 		}
 		const_reverse_iterator rbegin() const
 		{
@@ -253,8 +256,7 @@ namespace ft
 					this->_alloc.construct(tmp_arr + i, this->_vector_array[i]);
 				for (size_type i = 0; i < this->_n; i++)
 				{
-					if (this->_vector_array[i])
-						this->_alloc.destroy(this->_vector_array + i);
+					this->_alloc.destroy(this->_vector_array + i);
 				}
 				this->_vector_array = tmp_arr;
 			}
