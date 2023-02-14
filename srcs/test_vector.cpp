@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_vector copy.cpp                               :+:      :+:    :+:   */
+/*   test_vector.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/14 19:42:06 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/14 20:42:39 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include "../containers/vector.hpp"
-#include "../containers/stack.hpp"
-#include <vector>
 #include <deque>
-#include <stack>
-#include "../utils/integral_constant.hpp"
-
-	using namespace ft;
+#include "../utils/header_ns.hpp"
 	
-int main()
+void  test_vector()
 {
 
 std::cout << "=============================================================================" << std::endl;
@@ -31,10 +25,10 @@ std::cout << "==================================================================
 //							test vector 's constructors
 /*=============================================================================*/
 	
-	vector<int> first;
+	NS::vector<int> first;
 	std::cout << "default constructor: begin == end " << (first.begin() == first.end()) << std::endl;
 	std::cout << "default constructor: size " << first.size() << std::endl;
-	vector<int> second (4, 100);
+	NS::vector<int> second (4, 100);
 	std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
 	std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
 	std::cout << "fill  construct vector content: " << std::endl;
@@ -43,10 +37,10 @@ std::cout << "==================================================================
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 
 
-	vector<int> third (second.begin(), second.end());
-	std::cout << "range constructor : size " << third.size() << std::endl;
-	for (size_t i = 0; i < third.size(); i++)
-		std::cout << *(third.begin() + i) << std::endl;
+	// NS::vector<int> third (second.begin(), second.end());
+	// std::cout << "range constructor : size " << third.size() << std::endl;
+	// for (size_t i = 0; i < third.size(); i++)
+	// 	std::cout << *(third.begin() + i) << std::endl;
 
 /*=============================================================================*/
 //							test operator=
@@ -54,14 +48,14 @@ std::cout << "==================================================================
 	
 	std::cout << "operator equal overload: copy second in fourth: " << std::endl 
 		<< "fourth content: " << std::endl;
-	vector<int> forth = second;
+	NS::vector<int> forth = second;
 	for (size_t i = 0; i < forth.size(); i++)
 		std::cout << *(forth.begin() + i) << std::endl;
 
 /*=============================================================================*/
 //							test iterators
 /*=============================================================================*/
-	vector<std::string> test_str;
+	NS::vector<std::string> test_str;
 	test_str.push_back("pouet");
 	test_str.push_back("coucou");
 	test_str.push_back("youpi");
@@ -73,7 +67,7 @@ std::cout << "==================================================================
 	// 	std::cout << *(test_str.begin() + i) << std::endl;
 
 
-	for (vector<std::string>::iterator it = test_str.begin(); it != test_str.end(); it++)
+	for (NS::vector<std::string>::iterator it = test_str.begin(); it != test_str.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << "test iterators begin(): " << *test_str.begin() << std::endl;
 	std::cout << "test iterators begin() + 1: " << *(test_str.begin() + 1) << std::endl;
@@ -152,8 +146,8 @@ std::cout << "==================================================================
 	{
 		std::cerr << e.what() << '\n';
 	}
-	vector<int>::size_type sz;
-	vector<int> bar;
+	NS::vector<int>::size_type sz;
+	NS::vector<int> bar;
  	sz = bar.capacity();
 	bar.reserve(10);
 	std::cout << "making bar grow:\n";

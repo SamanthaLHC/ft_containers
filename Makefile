@@ -6,55 +6,66 @@
 #    By: sam <sam@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 14:01:55 by sle-huec          #+#    #+#              #
-#    Updated: 2023/02/14 19:43:52 by sam              ###   ########.fr        #
+#    Updated: 2023/02/14 20:43:16 by sam              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_containers
+NAME_FT = ft_containers
+NAME_STD = std_containers
 
 # **************************************************************************** #
 #    Compiler                                                                  #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -MMD -g3 -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -g3 -Wall -Wextra -Werror -std=c++98
+FT_FLAG = -D FT
+INCLUDE = -I./containers -I./iterators -I./utils -MMD
 
 # **************************************************************************** #
-#    Sources  & includes                                                       #
+#    Sources                                                                   #
 # **************************************************************************** #
 
-INCLUDE = -I./containers -I./utils 
 
 SRCS_PATH = ./srcs/
 SRCS = $(addprefix $(SRCS_PATH), \
 		test_stack.cpp			\
 		test_vector.cpp			\
+		main.cpp				\
 		subject_main.cpp)
 
-OBJ_PATH = ./objs/
-OBJS	= $(SRCS:$(SRCS_PATH)%.cpp=$(OBJ_PATH)%.o)
-DEPS	= $(SRCS:$(SRCS_PATH)%.cpp=$(OBJ_PATH)%.d)
+OBJS_FT	= $(SRCS:$(SRCS_PATH)%.cpp=objs/ft_%.o)
+DEPS_FT	= $(SRCS:$(SRCS_PATH)%.cpp=objs/ft_%.d)
 
+OBJS_STD = $(SRCS:$(SRCS_PATH)%.cpp=objs/std_%.o)
+DEPS_STD = $(SRCS:$(SRCS_PATH)%.cpp=objs/std_%.d)
 
 # **************************************************************************** #
 #    Rules                                                                     #
 # **************************************************************************** #
 
-all: $(NAME)
+all: $(NAME_FT) $(NAME_STD)
 
-${NAME}: ${OBJS}
-	${CXX} ${CXXFLAGS} ${OBJS} -o ${NAME}
+${NAME_FT}: ${OBJS_FT}
+	${CXX} ${CXXFLAGS} ${OBJS_FT} -o ${NAME_FT}
 
-$(OBJ_PATH)%.o: $(SRCS_PATH)%.cpp
-	mkdir -p $(OBJ_PATH)
+${NAME_STD}: ${OBJS_STD}
+	${CXX} ${CXXFLAGS} ${OBJS_STD} -o ${NAME_STD}
+
+objs/ft_%.o: $(SRCS_PATH)%.cpp
+	mkdir -p objs
+	$(CXX) $(CXXFLAGS) $(INCLUDE) $(FT_FLAG) -c $< -o $@
+
+objs/std_%.o: $(SRCS_PATH)%.cpp
+	mkdir -p objs
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	rm -rf ${OBJS} ${DEPS}
+	rm -rf objs
 
 fclean: clean
-	rm -rf ${NAME}
-	rm -rf ${OBJ_PATH}
+	rm -rf ${NAME_FT}
+	rm -rf ${NAME_STD}
 
 re: fclean
 	
@@ -72,4 +83,5 @@ run: $(NAME)
 
 .PHONY: clean fclean re grind run
 
--include ${DEPS}
+-include ${DEPS_FT}
+-include ${DEPS_STD}

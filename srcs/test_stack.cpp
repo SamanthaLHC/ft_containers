@@ -6,22 +6,15 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/14 19:38:14 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/14 20:42:55 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include "../containers/vector.hpp"
-#include "../containers/stack.hpp"
-#include <vector>
-#include <deque>
-#include <stack>
-#include "integral_constant.hpp"
-
-	using namespace ft;
+#include "../utils/header_ns.hpp"
 	
-int main()
+void test_stack()
 {
 std::cout << "=============================================================================" << std::endl;
 std::cout << "		test stack                                         " << std::endl;
@@ -30,7 +23,7 @@ std::cout << "==================================================================
 // // PROBLEME WITH COPY WITH ANOTHER CONTAINER !!!!!
 // // ADD  FRIEND POUR LES OPERATORS STACK !!!!!
 
-	stack<int> mystack;
+	NS::stack<int> mystack;
 
 	std::cout << "elements in stack: " << std::endl;
 	for (int i=0; i<5; ++i)
@@ -52,7 +45,7 @@ std::cout << "==================================================================
 	mystack.top() -= 5;
 	std::cout << "mystack.top() after push: " << mystack.top() << '\n';
 
-	stack<int> myints;
+	NS::stack<int> myints;
 	std::cout << "0. empty stack size: " << myints.size() << '\n';
 
 	for (int i=0; i<5; i++) myints.push(i);
@@ -60,9 +53,9 @@ std::cout << "==================================================================
 
 	myints.pop();
 	std::cout << "2. size after pop: " << myints.size() << '\n';
-	vector<int> myvector (2,200);        // vector with 2 elements
+	NS::vector<int> myvector (2,200);        // vector with 2 elements
 	std::cout << "size of myvector: " << myvector.size() << '\n';
-	stack<int,vector<int> > cpy (myvector);
+	NS::stack<int,NS::vector<int> > cpy (myvector);
 	std::cout << "size of stack cpy: " << cpy.size() << '\n';
 	std::cout << "testing non member operator overload: " << std::endl;
 	if ( mystack == myints)
