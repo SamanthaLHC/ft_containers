@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/14 17:12:21 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/14 18:54:38 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ namespace ft
 			if (this->_vector_array != NULL)
 			{
 				for (size_type i = 0; i < this->_n; i++)
-				{
-					// if (this->_vector_array[i])
 						this->_alloc.destroy(this->_vector_array + i);
-				}
 				this->_alloc.deallocate(this->_vector_array, this->_n);
 			}
 		}
@@ -284,13 +281,8 @@ namespace ft
 
 		void push_back (const value_type& val)
 		{
-			if (this->_capacity == 0)
-				reserve(1);
-			else
-			{
-				reserve(this->_n + 1);
-				this->_alloc.construct(this->_vector_array + _n, val);
-			}
+			reserve(this->_n + 1);
+			this->_alloc.construct(this->_vector_array + _n, val);
 			this->_n++;
 		}
 

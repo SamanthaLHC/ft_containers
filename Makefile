@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+         #
+#    By: sam <sam@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 14:01:55 by sle-huec          #+#    #+#              #
-#    Updated: 2023/02/10 14:02:03 by sle-huec         ###   ########.fr        #
+#    Updated: 2023/02/14 19:43:52 by sam              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ INCLUDE = -I./containers -I./utils
 
 SRCS_PATH = ./srcs/
 SRCS = $(addprefix $(SRCS_PATH), \
-		main.cpp)
+		test_stack.cpp			\
+		test_vector.cpp			\
+		subject_main.cpp)
 
 OBJ_PATH = ./objs/
 OBJS	= $(SRCS:$(SRCS_PATH)%.cpp=$(OBJ_PATH)%.o)
