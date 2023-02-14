@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:15:08 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/13 17:59:20 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/14 16:10:10 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ namespace ft
 		reverse_iterator &operator=(const reverse_iterator<U>& other)
 		{
 			this->current = other.current;
+			return *this;
 		}
 
 		//______________members functions_________________________________
