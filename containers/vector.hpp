@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/13 17:55:17 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/14 17:12:21 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,17 @@ namespace ft
 		// à ce moment là et qu'il aura besoin d'un .hpp ds lequel il y a la def du template
 
 		// default construct: empty container with default constructed allocator
-		vector(const allocator_type &alloc = Allocator()) : 
+		explicit vector(const allocator_type &alloc = Allocator()) : 
 			_alloc(alloc), _n(0), _capacity(0), _vector_array(NULL) {}
 
 		// fill constructor: construct a container with n elements each one is a copy of val
-		vector(size_type n, const T &val = T(), const Allocator &alloc = Allocator()) : 
+		explicit vector(size_type n, const T &val = T(), const Allocator &alloc = Allocator()) : 
 			_alloc(alloc), _n(n), _capacity(n)
 		{
+		// si allocate fail: une exception est jetée (try / catch ???)
 			this->_vector_array = this->_alloc.allocate(n);
-			// si allocate fail: une exception est jetée (try / catch ???)
-			if (_vector_array != NULL)
-			{
-				for (size_type i = 0; i < n; i++)
-					this->_alloc.construct(this->_vector_array + i, val);
-			}
+			for (size_type i = 0; i < this->_n; i++)
+				this->_alloc.construct(this->_vector_array + i, val);
 		}
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
@@ -139,20 +136,24 @@ namespace ft
 
 		iterator begin()
 		{
-			return this->_vector_array;
+			iterator iter(this->_vector_array);
+			return iter;
 		}
 		const_iterator begin() const
 		{
-			return this->_vector_array;
+			const_iterator iter(this->_vector_array);
+			return iter;
 		}
 
 		iterator end()
 		{
-			return this->_vector_array + this->_n;
+			iterator iter(_vector_array + this->_n);
+			return iter;
 		}
 		const_iterator end() const
 		{
-			return this->_vector_array + this->_n;
+			const_iterator iter(_vector_array + this->_n);
+			return iter;
 		}
 
   		reverse_iterator rbegin()
@@ -161,17 +162,20 @@ namespace ft
 			return iter;
 		}
 		const_reverse_iterator rbegin() const
-		{
-			return this->_vector_array + this->_n;
+		{	
+			const_reverse_iterator iter(end());
+			return iter;
 		}
 
 		reverse_iterator rend()
 		{
-			return this->_vector_array;
+			reverse_iterator iter(begin());
+			return iter;
 		}
 		const_reverse_iterator rend() const
 		{
-			return this->_vector_array;
+			const_reverse_iterator iter(begin());
+			return iter;
 		}
 
 // //ELEMENT ACCES_____________________________________________________________
@@ -357,7 +361,7 @@ namespace ft
 		Allocator 			_alloc;
 		size_type			_n;
 		size_type			_capacity;
-		pointer				_vector_array;
+		pointer			_vector_array;
 	};
 
 	// template <class Allocator>
