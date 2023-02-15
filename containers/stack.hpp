@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 13:12:44 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:29:48 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 #include <iostream>
 #include <memory> // pour std::allocator
-#include <vector.hpp>
-#include <vector>
-// #include "vector.hpp"
+
+#include "vector.hpp"
 
 namespace ft
 {
@@ -87,9 +86,24 @@ namespace ft
 			return c.pop_back();
 		}
 
+		// FRIENDSHIP_______________________________________________________
+		template<typename Tx, typename ContainerX>
+		friend bool operator==(const stack<Tx, ContainerX>& x, const stack<Tx, ContainerX>& y);
+		template <class Tx, class ContainerX> 
+		friend bool operator< (const stack<Tx, ContainerX>& x, const stack<Tx, ContainerX>& y);
+		template <class Tx, class ContainerX> 
+		friend bool operator!=(const stack<Tx, ContainerX>& x,const stack<Tx, ContainerX>& y);
+		template <class Tx, class ContainerX> 
+		friend bool operator> (const stack<Tx, ContainerX>& x,const stack<Tx, ContainerX>& y);
+		template <class Tx, class ContainerX> 
+		friend bool operator>=(const stack<Tx, ContainerX>& x,const stack<Tx, ContainerX>& y);
+		template <class Tx, class ContainerX> 
+		friend bool operator<=(const stack<Tx, ContainerX>& x,const stack<Tx, ContainerX>& y);
+
 	protected:
 		//objet membre
 		Container c;
+
 	};
 
 	// NON MEMBER FUNCTIONS____________________________________________________
@@ -97,37 +111,37 @@ namespace ft
 	template <class T, class Container>
 	bool operator==(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x == y;
+		return x.c == y.c;
 	}
 
 	template <class T, class Container>
 	bool operator<(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x < y;
+		return x.c < y.c;
 	}
 
 	template <class T, class Container>
 	bool operator!=(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x != y;
+		return x.c != y.c;
 	}
 
 	template <class T, class Container>
 	bool operator>(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x > y;
+		return x.c > y.c;
 	}
 
 	template <class T, class Container>
 	bool operator>=(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x >= y;
+		return x.c >= y.c;
 	}
 
 	template <class T, class Container>
 	bool operator<=(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x <= y;
+		return x.c <= y.c;
 	}
 }
 
