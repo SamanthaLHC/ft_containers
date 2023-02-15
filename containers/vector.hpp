@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:27:33 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:53:58 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ namespace ft
 		void reserve (size_type n)
 		{
 			if (n > max_size())
-				throw std::length_error("length_error: vector::reserve");
+				throw std::length_error("vector::reserve");
 			if (n > this->_capacity)
 			{
 				pointer tmp_arr = this->_alloc.allocate(n);

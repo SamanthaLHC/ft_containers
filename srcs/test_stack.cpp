@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:35:53 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:52:58 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void test_stack()
 	std::cout << "=============================================================================" << std::endl;
 	std::cout << "		test stack                                         " << std::endl;
 	std::cout << "=============================================================================" << std::endl;
-
-	// // PROBLEME WITH COPY WITH ANOTHER CONTAINER !!!!!
-	// // ADD  FRIEND POUR LES OPERATORS STACK !!!!!
 
 	NS::stack<int, std::vector<int> > mystack;
 

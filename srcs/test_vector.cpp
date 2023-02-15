@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 13:16:01 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:56:04 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ std::cout << "==================================================================
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 
-
 	NS::vector<int> third (second.begin(), second.end());
 	std::cout << "range constructor : size " << third.size() << std::endl;
-	// for (size_t i = 0; i < third.size(); i++)
-	// 	std::cout << *(third.begin() + i) << std::endl;
-
 	for (NS::vector<int>::iterator it = third.begin(); it != third.end(); it++)
 		std::cout << *it << std::endl;
 
@@ -64,14 +60,9 @@ std::cout << "==================================================================
 	test_str.push_back("youpi");
 	test_str.push_back("oley");
 	std::cout << "new vector content: " << std::endl;
-
-
-	// for (size_t i = 0; i < test_str.size(); i++)
-	// 	std::cout << *(test_str.begin() + i) << std::endl;
-
-
 	for (NS::vector<std::string>::iterator it = test_str.begin(); it != test_str.end(); it++)
 		std::cout << *it << std::endl;
+
 	std::cout << "test iterators begin(): " << *test_str.begin() << std::endl;
 	std::cout << "test iterators begin() + 1: " << *(test_str.begin() + 1) << std::endl;
 	std::cout << "test iterators end() - 1: " << *(test_str.end() - 1) << std::endl;
