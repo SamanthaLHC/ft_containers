@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_vector.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/14 20:42:39 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/15 13:16:01 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,21 @@ std::cout << "==================================================================
 	std::cout << "default constructor: begin == end " << (first.begin() == first.end()) << std::endl;
 	std::cout << "default constructor: size " << first.size() << std::endl;
 	NS::vector<int> second (4, 100);
-	std::cout << "fill constructor : begin " <<  *second.begin() << std::endl;
-	std::cout << "fill constructor : end " <<  *(second.end() - 1) << std::endl;
+	std::cout << "fill constructor second : begin " <<  *second.begin() << std::endl;
+	std::cout << "fill constructor second : end " <<  *(second.end() - 1) << std::endl;
 	std::cout << "fill  construct vector content: " << std::endl;
 	for (size_t i = 0; i < second.size(); i++)
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 
 
-	// NS::vector<int> third (second.begin(), second.end());
-	// std::cout << "range constructor : size " << third.size() << std::endl;
+	NS::vector<int> third (second.begin(), second.end());
+	std::cout << "range constructor : size " << third.size() << std::endl;
 	// for (size_t i = 0; i < third.size(); i++)
 	// 	std::cout << *(third.begin() + i) << std::endl;
+
+	for (NS::vector<int>::iterator it = third.begin(); it != third.end(); it++)
+		std::cout << *it << std::endl;
 
 /*=============================================================================*/
 //							test operator=

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/14 18:54:38 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/15 13:23:49 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,23 @@ namespace ft
 		}
 
 		// range constructor: construct a container with as many elem as the range (fist, last)
-		// with each elem contuct from its corresponding elem in that range in the same order.
-		//contains all the elements between first and last,
-		//including the element pointed by first but not the element pointed by last.
-
 
 		//  inputiterator est un object complex, pour faire un range on a besoin d'un objet complex
 		// qui permet d'acceder à de la donnée d'un autre container. on s'assure avec enable _if
 		// que le type input iterator n'est pas un integral
 		// si le type est invalide le code n’est juste pas généré mais la compilation se fera.
 
-		// template <class InputIterator>
-		// vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
-		// 	InputIterator last,
-		// 	const allocator_type& alloc = allocator_type()): _alloc(alloc),
-		// 	// ces variables sont const, donc modifiables uniquement à la construction
-		// 		_n(std::distance(first, last)), _capacity(_n + 1)
-		// {
-		// 	this->_vector_array = this->_alloc.allocate(this->_capacity);
-
-		// 	//debug
-		// 	std::cout << _n << std::endl;
-		// 	std::cout << _vector_array << std::endl;
-		// 	std::cout << first << std::endl;
-		// 	std::cout << last << std::endl;	
-		// }
+		template <class InputIterator>
+		vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
+			InputIterator last,
+			const allocator_type& alloc = allocator_type()): _alloc(alloc),
+			// ces variables sont const, donc modifiables uniquement à la construction
+				_n(std::distance(first, last)), _capacity(_n + 1)
+		{
+			this->_vector_array = this->_alloc.allocate(this->_n);
+			for (size_type i = 0; i < this->_n; i++)
+				this->_alloc.construct(this->_vector_array + i, *(first + i));
+		}
 
 		vector(const vector &cpy) : _alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity), 
 									_vector_array(cpy._vector_array)
