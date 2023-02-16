@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 16:32:52 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/16 17:07:08 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ void test_vector()
 	//							test element acces
 	/*=============================================================================*/
 
+	std::cout << "element access test: " << std::endl;
+	std::cout << test_str[2] << std::endl;
+	std::cout << test_str.at(1) << std::endl;
+	std::cout << test_str.front() << std::endl;
+	std::cout << test_str.back() << std::endl;
+
 	/*=============================================================================*/
 	//							test capacity
 	/*=============================================================================*/
@@ -96,6 +102,34 @@ void test_vector()
 	std::cout << first.empty() << std::endl;
 	std::cout << "test a not empty bool : " << std::endl;
 	std::cout << second.empty() << std::endl;
+	
+	// // ___________________________________-reserve:
+
+	std::cout << "test reserve:" << std::endl;
+	std::cout << "capacity: " << forth.capacity() << std::endl;
+	forth.reserve(100);
+	std::cout << "capacity: " << forth.capacity() << std::endl;
+	try
+	{
+		size_t msz = forth.max_size() + 100;
+		forth.reserve(msz);
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	NS::vector<int>::size_type sz;
+	NS::vector<int> bar;
+	sz = bar.capacity();
+	bar.reserve(10);
+	std::cout << "making bar grow:\n";
+	for (int i = 0; i < 10; ++i)
+	{
+		bar.push_back(i);
+		if (sz != bar.capacity())
+		{
+			sz = bar.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
 
 	/*=============================================================================*/
 	//							test modifier
@@ -131,33 +165,6 @@ void test_vector()
 	std::cout << "size: " << forth.size() << std::endl;
 	std::cout << "begin is end : " << (forth.begin() == forth.end()) << std::endl;
 
-	// // ___________________________________-reserve:
-
-	std::cout << "test reserve:" << std::endl;
-	std::cout << "capacity: " << forth.capacity() << std::endl;
-	forth.reserve(100);
-	std::cout << "capacity: " << forth.capacity() << std::endl;
-	try
-	{
-		size_t msz = forth.max_size() + 100;
-		forth.reserve(msz);
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	NS::vector<int>::size_type sz;
-	NS::vector<int> bar;
-	sz = bar.capacity();
-	bar.reserve(10);
-	std::cout << "making bar grow:\n";
-	for (int i = 0; i < 10; ++i)
-	{
-		bar.push_back(i);
-		if (sz != bar.capacity())
-		{
-			sz = bar.capacity();
-			std::cout << "capacity changed: " << sz << '\n';
 		}
 	}
 	//_____________________________________-resize:
@@ -179,11 +186,12 @@ void test_vector()
 /*=============================================================================*/
 	//				test relationnal operators
 /*=============================================================================*/
-	NS::vector<int> foo(3, 100); // three ints with a value of 100
-	NS::vector<int> baar(2, 200); // two ints with a value of 200
 
-	if (foo == baar)
-		std::cout << "foo and bar are equal\n";
+	// NS::vector<int> foo(3, 100); // three ints with a value of 100
+	// NS::vector<int> baar(2, 200); // two ints with a value of 200
+
+	// if (foo == baar)
+	// 	std::cout << "foo and bar are equal\n";
 	// if (foo != baar)
 	// 	std::cout << "foo and baar are not equal\n";
 	// if (foo < baar)

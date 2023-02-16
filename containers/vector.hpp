@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 16:37:36 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/16 17:42:31 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,17 +266,19 @@ namespace ft
 		// //MODIFIERS_________________________________________________________________
 
 // 		//range
-// 		template <class InputIterator>
-// 		void assign (InputIterator first, InputIterator last)
-// 		{
-
-// 		}
+		template <class InputIterator>
+		void assign (InputIterator first, InputIterator last)
+		{
+			erase(begin(), end());
+			insert(begin(), first, last);
+		}
 
 // 		//fill
-// 		void assign (size_type n, const value_type& val)
-// 		{
-
-// 		}
+		void assign (size_type n, const value_type& val)
+		{
+			erase(begin(), end());
+			insert(begin(), n, val);
+		}
 
 		void push_back (const value_type& val)
 		{
@@ -320,10 +322,13 @@ namespace ft
 
 // 		}
 
-// 		void swap (vector& other)
-// 		{
-
-// 		}
+		void swap (vector& other)
+		{
+			std::swap(this->_alloc, other._alloc);
+			std::swap(this->_n, other._n);
+			std::swap(this->_capacity, other._capacity);
+			std::swap(this->_vector_array, other._vector_array);
+		}
 
 		void clear()
 		{
@@ -364,7 +369,7 @@ namespace ft
 	template <class T, class Allocator>
 	 bool operator!=(const vector< bool,Allocator>& x,const vector< bool,Allocator>& y)
 	{
-		return x != y;
+		return !(x == y);
 	}
 
 	template <class T, class Allocator>
