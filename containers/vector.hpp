@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 14:49:45 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/16 16:37:36 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <algorithm>
 #include "../utils/enable_if.hpp"
 #include "../utils/is_integral.hpp"
+#include "../utils/equal.hpp"
 #include "../iterators/reverse_iterator.hpp"
 
 namespace ft
@@ -219,10 +220,20 @@ namespace ft
 			return this->_alloc.max_size();
 		}
 
-		// void resize (size_type n, value_type val = value_type())
-		// {
-
-		// }
+		void resize (size_type n, value_type val = value_type())
+		{
+			if (n < this->_n)
+			{
+				while (this->_n > n)
+					this->pop_back();
+			}
+			else if (this->_n < n)
+			{
+				while (this->_n != n)
+					this->push_back(val);
+			}
+			this->_n = n;
+		}
 
 		size_type capacity() const
 		{
@@ -338,15 +349,53 @@ namespace ft
 	private:
 //============//
 
-		Allocator 			_alloc;
-		size_type			_n;
-		size_type			_capacity;
+		Allocator 		_alloc;
+		size_type		_n;
+		size_type		_capacity;
 		pointer			_vector_array;
 	};
 
-	// template <class Allocator>
-	// bool operator==(const vector<bool,Allocator>& x,const vector<bool,Allocator>& y)
-	// {}
-}
+	template <class T, class Allocator>
+	 bool operator==(const vector< bool,Allocator>& x,const vector< bool,Allocator>& y)
+	{
+		return (x.size() == y.size && ft::equal(x.begin(), x.end(), y.begin()));
+	}
+
+	template <class T, class Allocator>
+	 bool operator!=(const vector< bool,Allocator>& x,const vector< bool,Allocator>& y)
+	{
+		return x != y;
+	}
+
+	template <class T, class Allocator>
+	 bool operator< (const vector< bool,Allocator>& x, const vector< bool,Allocator>& y)
+	{
+		return x < y;
+	}
+	
+	template <class T, class Allocator>
+	 bool operator> (const vector< bool,Allocator>& x, const vector< bool,Allocator>& y)
+	{
+		return y < x;
+	}
+
+	template <class T, class Allocator>
+	 bool operator>=(const vector< bool,Allocator>& x, const vector< bool,Allocator>& y)
+	{
+		return x >= y;
+	}
+
+	template <class T, class Allocator>
+	 bool operator<=(const vector< bool,Allocator>& x, const vector< bool,Allocator>& y)
+	{
+		return x <= y;
+	}
+
+	template <class T, class Alloc> 
+	void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+	{
+		x.swap(y);
+	}
+}	
 
 #endif
