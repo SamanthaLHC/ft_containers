@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:53:58 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:49:45 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 
 #include <iostream>
 #include <algorithm>
-#include <is_integral.hpp>
-// #include <reverse_iterator.hpp>
-#include <enable_if.hpp>
-// #include "enable_if.hpp"
+#include "../utils/enable_if.hpp"
+#include "../utils/is_integral.hpp"
 #include "../iterators/reverse_iterator.hpp"
-// #include "is_integral.hpp"
-// #include
 
 namespace ft
 {

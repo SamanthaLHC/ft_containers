@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:29:48 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:51:37 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ namespace ft
 		}
 
 		// FRIENDSHIP_______________________________________________________
+
 		template<typename Tx, typename ContainerX>
 		friend bool operator==(const stack<Tx, ContainerX>& x, const stack<Tx, ContainerX>& y);
 		template <class Tx, class ContainerX> 

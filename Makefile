@@ -6,7 +6,7 @@
 #    By: sam <sam@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 14:01:55 by sle-huec          #+#    #+#              #
-#    Updated: 2023/02/14 20:43:16 by sam              ###   ########.fr        #
+#    Updated: 2023/02/16 15:26:19 by sam              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ objs/std_%.o: $(SRCS_PATH)%.cpp
 
 clean:
 	rm -rf objs
+	rm test1
+	rm test2
 
 fclean: clean
 	rm -rf ${NAME_FT}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_vector.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:56:04 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:58:01 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ std::cout << "==================================================================
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "fill constructor : size " << second.size() << std::endl;
 
-	NS::vector<int> third (second.begin(), second.end());
-	std::cout << "range constructor : size " << third.size() << std::endl;
+	NS::vector<int> third (second.begin() + 1, second.end() - 1);
+	std::cout << "range constructor filled with two iterators taken from second :"
+	<< std::endl << "size " << third.size() << std::endl;
 	for (NS::vector<int>::iterator it = third.begin(); it != third.end(); it++)
 		std::cout << *it << std::endl;
 
+	NS::vector<std::string> test_str;
+	test_str.push_back("pouet");
+	test_str.push_back("coucou");
+	test_str.push_back("youpi");
+	test_str.push_back("oley");
+	NS::vector<std::string> range_str (test_str.begin(), test_str.end());
+	std::cout << "range constructor filled with differents values(strings) :" << std::endl;
+	for (NS::vector<std::string>::iterator it = range_str.begin(); it != range_str.end(); it++)
+	std::cout << *it << std::endl;
+	
 /*=============================================================================*/
 //							test operator=
 /*=============================================================================*/
@@ -54,11 +65,6 @@ std::cout << "==================================================================
 /*=============================================================================*/
 //							test iterators
 /*=============================================================================*/
-	NS::vector<std::string> test_str;
-	test_str.push_back("pouet");
-	test_str.push_back("coucou");
-	test_str.push_back("youpi");
-	test_str.push_back("oley");
 	std::cout << "new vector content: " << std::endl;
 	for (NS::vector<std::string>::iterator it = test_str.begin(); it != test_str.end(); it++)
 		std::cout << *it << std::endl;
