@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 18:59:34 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 19:19:30 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "../utils/is_integral.hpp"
 #include "../utils/equal.hpp"
 #include "../iterators/reverse_iterator.hpp"
+#include "../utils/lexicographical_compare.hpp"
 
 namespace ft
 {
@@ -392,7 +393,7 @@ namespace ft
 	template <class T, class Allocator>
 	bool operator==(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
 	{
-		return (x.size() == y.size && ft::equal(x.begin(), x.end(), y.begin()));
+		return (x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin()));
 	}
 
 	template <class T, class Allocator>
@@ -404,7 +405,7 @@ namespace ft
 	template <class T, class Allocator>
 	bool operator<(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
 	{
-		return x < y;
+		return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 
 	template <class T, class Allocator>
@@ -416,13 +417,13 @@ namespace ft
 	template <class T, class Allocator>
 	bool operator>=(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
 	{
-		return x >= y;
+		return !(x < y);
 	}
 
 	template <class T, class Allocator>
 	bool operator<=(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
 	{
-		return x <= y;
+		return !(x < y);
 	}
 
 	template <class T, class Alloc>

@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 18:22:23 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 19:22:24 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,19 +228,19 @@ void test_vector()
 	//				test relationnal operators
 	/*=============================================================================*/
 
-	// NS::vector<int> foo(3, 100); // three ints with a value of 100
-	// NS::vector<int> baar(2, 200); // two ints with a value of 200
+	NS::vector<int> f(3, 100); // three ints with a value of 100
+	NS::vector<int> b(2, 200); // two ints with a value of 200
 
-	// if (foo == baar)
+	// if (f == b)
 	// 	std::cout << "foo and bar are equal\n";
-	// if (foo != baar)
+	// if (f != b)
 	// 	std::cout << "foo and baar are not equal\n";
-	// if (foo < baar)
+	// if (f < b)
 	// 	std::cout << "foo is less than baar\n";
-	// if (foo > baar)
+	// if (f > b)
 	// 	std::cout << "foo is greater than baar\n";
-	// if (foo <= baar)
+	// if (f <= b)
 	// 	std::cout << "foo is less than or equal to baar\n";
-	// if (foo >= baar)
+	// if (f >= b)
 	// 	std::cout << "foo is greater than or equal to baar\n";
 }
