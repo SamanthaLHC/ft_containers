@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 16:40:03 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 18:59:34 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,24 +294,39 @@ namespace ft
 			this->_n--;
 		}
 
-		// 		//single elem
-		// 		iterator insert (iterator position, const value_type& val)
-		// 		{
+		//single elem
+		iterator insert (iterator position, const value_type& val)
+		{
+			size_type dist = position - this->begin();
+			if (this->_capacity == 0)
+				reserve (1);
+			if (this->_n == this->_capacity)
+				reserve(this->_n * 2);
+			iterator mv = this->end();
+			position = this->begin() + dist;
+			while (mv != position)
+			{
+				this->_alloc.construct(mv, *(mv - 1));
+				this->_alloc.destroy(mv - 1);
+				mv--;
+			}
+			this->_alloc.construct(position, val);
+			this->_n++;
+			return position;
+		}
 
-		// 		}
+		// //fill
+		// void insert (iterator position, size_type n, const value_type& val)
+		// {
 
-		// 		//fill
-		// 		void insert (iterator position, size_type n, const value_type& val)
-		// 		{
+		// }
 
-		// 		}
+		// //range
+		// template <class InputIterator>
+		// void insert (iterator position, InputIterator first, InputIterator last)
+		// {
 
-		// 		//range
-		// 		template <class InputIterator>
-		// 		void insert (iterator position, InputIterator first, InputIterator last)
-		// 		{
-
-		// 		}
+		// }
 
 		// delete one element at the pos position
 		iterator erase(iterator position)

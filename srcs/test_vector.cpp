@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 16:41:47 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 18:22:23 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,32 @@ void test_vector()
 	std::cout << "size: " << forth.size() << std::endl;
 	std::cout << "begin is end : " << (forth.begin() == forth.end()) << std::endl;
 
+	//_____________________________________-insert:
+
+	NS::vector<int> insert_test(3, 100);
+	NS::vector<int>::iterator it;
+
+	it = insert_test.begin();
+	it = insert_test.insert(it, 200);
+
+	// insert_test.insert(it, 2, 300);
+
+	// "it" no longer valid, get a new one:
+	it = insert_test.begin();
+
+	// NS::vector<int> anothervector(2, 400);
+	// insert_test.insert(it + 2, anothervector.begin(), anothervector.end());
+
+	// int myarray[] = {501, 502, 503};
+	// insert_test.insert(insert_test.begin(), myarray, myarray + 3);
+
+	std::cout << "myvector contains:";
+	for (it = insert_test.begin(); it < insert_test.end(); it++)
+		std::cout << ' ' << *it;
+	std::cout << '\n';
+
 	// ___________________________________-erase:
+
 	std::cout << "creating a vector with ten ints: " << std::endl;
 	NS::vector<int> erase_test;
 	for (int i = 1; i <= 10; i++)
