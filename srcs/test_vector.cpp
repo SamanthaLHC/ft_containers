@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 14:02:03 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 16:41:47 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,18 @@ void test_vector()
 	std::cout << "size: " << forth.size() << std::endl;
 	std::cout << "begin is end : " << (forth.begin() == forth.end()) << std::endl;
 
-	// 	}
+	// ___________________________________-erase:
+	std::cout << "creating a vector with ten ints: " << std::endl;
+	NS::vector<int> erase_test;
+	for (int i = 1; i <= 10; i++)
+		erase_test.push_back(i);
+
+	erase_test.erase(erase_test.begin() + 5);
+	erase_test.erase(erase_test.begin(), erase_test.begin() + 3);
+	std::cout << "this vector contains after erasing four elem:";
+	for (unsigned i = 0; i < erase_test.size(); ++i)
+		std::cout << ' ' << erase_test[i];
+	std::cout << '\n';
 
 	//_____________________________________-resize:
 
@@ -187,6 +198,7 @@ void test_vector()
 	for (size_t i = 0; i < resize_tst.size(); i++)
 		std::cout << ' ' << resize_tst[i];
 	std::cout << '\n';
+
 	/*=============================================================================*/
 	//				test relationnal operators
 	/*=============================================================================*/
