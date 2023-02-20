@@ -18,7 +18,7 @@ namespace ft
 		return true;
 	}
 
-	//BinaryPredicate = std::binary_function (take two objects in param in order tocompare these two)
+	//BinaryPredicate = std::binary_function (take two objects in param in order to compare these two)
 	template <class InputIterator1, class InputIterator2, class BinaryPredicate>
 	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2,
 		BinaryPredicate pred)
@@ -32,7 +32,6 @@ namespace ft
 		}
 		return true;
 	}
-
 }
 
 #endif

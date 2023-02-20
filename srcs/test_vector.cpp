@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 17:07:08 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 14:02:03 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void test_vector()
 	/*=============================================================================*/
 	//							test iterators
 	/*=============================================================================*/
-	
+
 	std::cout << "new vector content: " << std::endl;
 	for (NS::vector<std::string>::iterator it = test_str.begin(); it != test_str.end(); it++)
 		std::cout << *it << std::endl;
@@ -102,34 +102,38 @@ void test_vector()
 	std::cout << first.empty() << std::endl;
 	std::cout << "test a not empty bool : " << std::endl;
 	std::cout << second.empty() << std::endl;
-	
+
 	// // ___________________________________-reserve:
 
-	std::cout << "test reserve:" << std::endl;
-	std::cout << "capacity: " << forth.capacity() << std::endl;
-	forth.reserve(100);
-	std::cout << "capacity: " << forth.capacity() << std::endl;
-	try
-	{
-		size_t msz = forth.max_size() + 100;
-		forth.reserve(msz);
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << e.what() << '\n';
-	}
 	NS::vector<int>::size_type sz;
-	NS::vector<int> bar;
-	sz = bar.capacity();
-	bar.reserve(10);
-	std::cout << "making bar grow:\n";
-	for (int i = 0; i < 10; ++i)
+
+	NS::vector<int> fo;
+	fo.reserve(5);
+	sz = fo.capacity();
+	std::cout << "making foo grow:\n";
+	for (int i = 0; i < 100; ++i)
 	{
-		bar.push_back(i);
-		if (sz != bar.capacity())
+		fo.push_back(i);
+		if (sz != fo.capacity())
 		{
-			sz = bar.capacity();
+			sz = fo.capacity();
 			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
+
+	NS::vector<int> baar;
+	sz = baar.capacity();
+	baar.reserve(100); // this is the only difference with foo above
+	std::cout << "making baar grow:\n";
+	for (int i = 0; i < 100; ++i)
+	{
+		baar.push_back(i);
+		if (sz != baar.capacity())
+		{
+			sz = baar.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
 
 	/*=============================================================================*/
 	//							test modifier
@@ -153,7 +157,7 @@ void test_vector()
 		std::cout << *(second.begin() + i) << std::endl;
 	std::cout << "size after push: " << second.size() << std::endl;
 
-	// // ___________________________________-clear:
+	// ___________________________________-clear:
 
 	std::cout << "test clear: print vector before clearing: " << std::endl;
 	for (size_t i = 0; i < forth.size(); i++)
@@ -165,8 +169,8 @@ void test_vector()
 	std::cout << "size: " << forth.size() << std::endl;
 	std::cout << "begin is end : " << (forth.begin() == forth.end()) << std::endl;
 
-		}
-	}
+	// 	}
+
 	//_____________________________________-resize:
 
 	NS::vector<int> resize_tst;
@@ -183,9 +187,9 @@ void test_vector()
 	for (size_t i = 0; i < resize_tst.size(); i++)
 		std::cout << ' ' << resize_tst[i];
 	std::cout << '\n';
-/*=============================================================================*/
+	/*=============================================================================*/
 	//				test relationnal operators
-/*=============================================================================*/
+	/*=============================================================================*/
 
 	// NS::vector<int> foo(3, 100); // three ints with a value of 100
 	// NS::vector<int> baar(2, 200); // two ints with a value of 200

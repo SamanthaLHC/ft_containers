@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 17:42:31 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/20 13:59:14 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft
 		typedef typename Allocator::const_pointer 				const_pointer;
 		typedef T*												iterator;
 		typedef const T*										const_iterator;
-		typedef typename ft::reverse_iterator<iterator>		reverse_iterator;
+		typedef typename ft::reverse_iterator<iterator>			reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		//______________Constructors and destructor_________________________________
@@ -247,19 +247,19 @@ namespace ft
 
 		void reserve (size_type n)
 		{
-			if (n > max_size())
+			if (n <= this->_capacity)
+				return;
+			if (n > this->max_size())
 				throw std::length_error("vector::reserve");
-			if (n > this->_capacity)
+			pointer tmp_arr = this->_alloc.allocate(n);
+			for (size_type i = 0; i < this->_n; i++)
 			{
-				pointer tmp_arr = this->_alloc.allocate(n);
-				for (size_type i = 0; i < this->_n; i++)
-					this->_alloc.construct(tmp_arr + i, this->_vector_array[i]);
-				for (size_type i = 0; i < this->_n; i++)
-				{
-					this->_alloc.destroy(this->_vector_array + i);
-				}
-				this->_vector_array = tmp_arr;
+				this->_alloc.construct(tmp_arr + i, this->_vector_array[i]);
+				this->_alloc.destroy(this->_vector_array + i);
 			}
+			if (this->_capacity > 0)
+				this->_alloc.deallocate(this->_vector_array, this->_capacity);
+			this->_vector_array = tmp_arr;
 			this->_capacity = n;
 		}
 
@@ -282,7 +282,10 @@ namespace ft
 
 		void push_back (const value_type& val)
 		{
-			reserve(this->_n + 1);
+			if (this->_capacity == 0)
+				reserve(1);
+			if (this->_n == this->_capacity)
+				reserve(this->_n * 2);
 			this->_alloc.construct(this->_vector_array + _n, val);
 			this->_n++;
 		}
