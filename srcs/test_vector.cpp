@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_vector.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 19:22:24 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/21 12:48:36 by samantha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void test_vector()
 	it = insert_test.begin();
 	it = insert_test.insert(it, 200);
 
-	// insert_test.insert(it, 2, 300);
+	insert_test.insert(it, 2, 300);
 
 	// "it" no longer valid, get a new one:
 	it = insert_test.begin();

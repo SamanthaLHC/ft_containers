@@ -6,7 +6,7 @@
 /*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 12:38:27 by samantha         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:30:48 by samantha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,11 +305,10 @@ namespace ft
 				reserve(this->_n * 2);
 			iterator mv = this->end();
 			position = this->begin() + dist;
-			while (mv != position)
+			for (; mv != position; mv--)
 			{
 				this->_alloc.construct(mv, *(mv - 1));
 				this->_alloc.destroy(mv - 1);
-				mv--;
 			}
 			this->_alloc.construct(position, val);
 			this->_n++;
@@ -320,29 +319,30 @@ namespace ft
 		void insert (iterator position, size_type n, const value_type& val)
 		{
 			size_type dist = position - this->begin();
+			size_type size = this->_n + n;
 			if (this->_capacity == 0)
 				reserve (1);
-			if (this->_n == this->_capacity)
-				reserve(this->_n * 2);
-			iterator mv = this->end();
+			if (size <= this->_capacity)
+				reserve(size * 2);
+			iterator it = this->end();
 			position = this->begin() + dist;
-			while (mv != position)
+			iterator mv = (this->begin() - 1) + n;
+			for (; it != position - 1; it--)
 			{
-				this->_alloc.construct(mv, *(mv - 1));
-				this->_alloc.destroy(mv - 1);
-				mv--;
+				this->_alloc.construct(mv, *(it - 1));
+				this->_alloc.destroy(it - 1);
 			}
-			this->_alloc.construct(position, val);
-			this->_n++;
-			return position;
+			for (; position != mv; position++)
+				this->_alloc.construct(position, val);
+			this->_n =+ n;
 		}
 
-		// //range
-		template <class InputIterator>
-		void insert (iterator position, InputIterator first, InputIterator last)
-		{
-			size_type range = std::distance(first, last);
-		}
+		// // //range
+		// template <class InputIterator>
+		// void insert (iterator position, InputIterator first, InputIterator last)
+		// {
+		// 	size_type range = std::distance(first, last);
+		// }
 
 		// delete one element at the pos position
 		iterator erase(iterator position)
