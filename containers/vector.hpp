@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 13:30:48 by samantha         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:13:37 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,17 +324,17 @@ namespace ft
 				reserve (1);
 			if (size <= this->_capacity)
 				reserve(size * 2);
-			iterator it = this->end();
+			iterator it = this->end() - 1;
 			position = this->begin() + dist;
-			iterator mv = (this->begin() - 1) + n;
-			for (; it != position - 1; it--)
+			iterator mv = (this->end() + n) - 1;
+			for (; it != position - 1; it--, mv--)
 			{
-				this->_alloc.construct(mv, *(it - 1));
-				this->_alloc.destroy(it - 1);
+				this->_alloc.construct(mv, *it);
+				this->_alloc.destroy(it);
 			}
-			for (; position != mv; position++)
+			for (; position - 1 != mv; position++)
 				this->_alloc.construct(position, val);
-			this->_n =+ n;
+			this->_n += n;
 		}
 
 		// // //range
