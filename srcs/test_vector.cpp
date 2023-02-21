@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 14:48:07 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:12:25 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ void test_vector()
 	NS::vector<int> insert_test(3, 100);
 	NS::vector<int>::iterator it;
 
-
 	it = insert_test.begin();
 	it = insert_test.insert(it, 200);
 
@@ -225,6 +224,23 @@ void test_vector()
 		std::cout << ' ' << resize_tst[i];
 	std::cout << '\n';
 
+	//_____________________________________-assign
+
+	NS::vector<char> characters;
+	NS::vector<int> two;
+	  
+	characters.assign(5, 'a');
+	const std::string extra(6, 'b');
+	characters.assign(extra.begin(), extra.end());
+	for (NS::vector<std::string>::iterator it = range_str.begin(); it != range_str.end(); it++)
+		std::cout << *it << std::endl;
+
+	int mynts[] = {1776, 7, 4};
+	two.assign(mynts, mynts + 3); // assigning from array.
+
+	std::cout << "Size of first: " << int(characters.size()) << '\n';
+	std::cout << "Size of second: " << int(two.size()) << '\n';
+
 	/*=============================================================================*/
 	//				test relationnal operators
 	/*=============================================================================*/
@@ -232,16 +248,16 @@ void test_vector()
 	NS::vector<int> f(3, 100); // three ints with a value of 100
 	NS::vector<int> b(2, 200); // two ints with a value of 200
 
-	// if (f == b)
-	// 	std::cout << "foo and bar are equal\n";
-	// if (f != b)
-	// 	std::cout << "foo and baar are not equal\n";
-	// if (f < b)
-	// 	std::cout << "foo is less than baar\n";
-	// if (f > b)
-	// 	std::cout << "foo is greater than baar\n";
-	// if (f <= b)
-	// 	std::cout << "foo is less than or equal to baar\n";
-	// if (f >= b)
-	// 	std::cout << "foo is greater than or equal to baar\n";
+	if (f == b)
+		std::cout << "foo and bar are equal\n";
+	if (f != b)
+		std::cout << "foo and baar are not equal\n";
+	if (f < b)
+		std::cout << "foo is less than baar\n";
+	if (f > b)
+		std::cout << "foo is greater than baar\n";
+	if (f <= b)
+		std::cout << "foo is less than or equal to baar\n";
+	if (f >= b)
+		std::cout << "foo is greater than or equal to baar\n";
 }

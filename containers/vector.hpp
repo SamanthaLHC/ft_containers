@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 14:45:59 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:14:53 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,12 +405,29 @@ namespace ft
 			this->_n = 0;
 		}
 
-		// //ALLOC_____________________________________________________________________
+		//ALLOC_____________________________________________________________________
 
 		allocator_type get_allocator() const
 		{
 			return allocator_type(this->_alloc);
 		}
+
+		//FRIENDSHIP_______________________________________________________________
+
+		template <class Tx, class AllocatorX>
+		friend bool operator==(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend bool operator!=(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend bool operator<(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend bool operator>(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend bool operator>=(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend bool operator<=(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
+		template <class Tx, class AllocatorX>
+		friend void swap(vector<Tx, AllocatorX> &x, vector<Tx, AllocatorX> &y);
 
 		//============//
 			private:
@@ -423,43 +440,43 @@ namespace ft
 	};
 
 	template <class T, class Allocator>
-	bool operator==(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator==(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
 		return (x.size() == y.size() && ft::equal(x.begin(), x.end(), y.begin()));
 	}
 
 	template <class T, class Allocator>
-	bool operator!=(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator!=(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
 		return !(x == y);
 	}
 
 	template <class T, class Allocator>
-	bool operator<(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator<(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
 		return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 
 	template <class T, class Allocator>
-	bool operator>(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator>(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
 		return y < x;
 	}
 
 	template <class T, class Allocator>
-	bool operator>=(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator>=(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
 		return !(x < y);
 	}
 
 	template <class T, class Allocator>
-	bool operator<=(const vector<bool, Allocator> &x, const vector<bool, Allocator> &y)
+	bool operator<=(const vector<T, Allocator> &x, const vector<T, Allocator> &y)
 	{
-		return !(x < y);
+		return !(x > y);
 	}
 
-	template <class T, class Alloc>
-	void swap(vector<T, Alloc> &x, vector<T, Alloc> &y)
+	template <class T, class Allocator>
+	void swap(vector<T, Allocator> &x, vector<T, Allocator> &y)
 	{
 		x.swap(y);
 	}
