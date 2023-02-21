@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 14:13:37 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:45:59 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ namespace ft
 
 		template <class InputIterator>
 		vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
-			   InputIterator last,
-			   const allocator_type &alloc = allocator_type()) : _alloc(alloc),
-																 // ces variables sont const, donc modifiables uniquement à la construction
-																 _n(std::distance(first, last)), _capacity(_n + 1)
+			InputIterator last, const allocator_type &alloc = allocator_type()) :
+			// ces variables sont const, donc modifiables uniquement à la construction
+			_alloc(alloc), _n(std::distance(first, last)), _capacity(_n + 1)
 		{
 			this->_vector_array = this->_alloc.allocate(this->_n);
 			for (size_type i = 0; i < this->_n; i++)
@@ -337,12 +336,30 @@ namespace ft
 			this->_n += n;
 		}
 
-		// // //range
-		// template <class InputIterator>
-		// void insert (iterator position, InputIterator first, InputIterator last)
-		// {
-		// 	size_type range = std::distance(first, last);
-		// }
+		//range
+		template <class InputIterator>
+		void insert (iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value),
+		 InputIterator>::type first,	InputIterator last)
+		{
+			size_type range = std::distance(first, last);
+			size_type dist = position - this->begin();
+			size_type size = this->_n + range;
+			if (this->_capacity == 0)
+				reserve (1);
+			if (size <= this->_capacity)
+				reserve(size * 2);
+			iterator it = this->end() - 1;
+			position = this->begin() + dist;
+			iterator mv = (this->end() + range) - 1;
+			for (; it != position - 1; it--, mv--)
+			{
+				this->_alloc.construct(mv, *it);
+				this->_alloc.destroy(it);
+			}
+			for (; position - 1 != mv && first != last; position++, first++)
+				this->_alloc.construct(position, *first);
+			this->_n += range;
+		}
 
 		// delete one element at the pos position
 		iterator erase(iterator position)

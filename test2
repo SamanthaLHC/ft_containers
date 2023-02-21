@@ -1,0 +1,106 @@
+=============================================================================
+			test vector                                        
+=============================================================================
+default constructor: begin == end 1
+default constructor: size 0
+fill constructor second : begin 100
+fill constructor second : end 100
+fill  construct vector content: 
+100
+100
+100
+100
+fill constructor : size 4
+range constructor filled with two iterators taken from second :
+size 2
+100
+100
+range constructor filled with differents values(strings) :
+pouet
+coucou
+youpi
+oley
+operator equal overload: copy second in fourth: 
+fourth content: 
+100
+100
+100
+100
+new vector content: 
+pouet
+coucou
+youpi
+oley
+test iterators begin(): pouet
+test iterators begin() + 1: coucou
+test iterators end() - 1: oley
+test iterators rbegin: oley
+test iterators rbegin + 1: youpi
+test iterators rend - 1: pouet
+element access test: 
+youpi
+coucou
+pouet
+oley
+test size : 
+4
+test max size : 
+2305843009213693951
+test capacity : 
+4
+test empty default constructor empty bool : 
+1
+test a not empty bool : 
+0
+making foo grow:
+capacity changed: 10
+capacity changed: 20
+capacity changed: 40
+capacity changed: 80
+capacity changed: 160
+making baar grow:
+capacity changed: 100
+test pop back:
+size before pop: 4
+100
+100
+100
+size after pop: 3
+test push back:
+size before push: 3
+100
+100
+100
+56
+size after push: 4
+test clear: print vector before clearing: 
+100
+100
+100
+100
+clear done: can't print tab
+size: 0
+begin is end : 1
+test insert vector after insert , insertfill and insert range, contains: 501 502 503 300 300 400 400 200 100 100 100
+creating a vector with ten ints: 
+this vector contains after erasing four elem: 4 5 7 8 9 10
+resize_tst contains: 1 2 3 4 5 100 100 100 0 0 0 0
+=============================================================================
+		test stack                                         
+=============================================================================
+elements in stack: 
+01234
+Popping out elements... 4 3 2 1 0
+mystack.top() after push: 15
+0. empty stack size: 0
+1. size after push: 5
+2. size after pop: 4
+size of myvector: 2
+size of stack cpy: 2
+testing non member operator overload: 
+stacks not equal
+stacks are not equal
+not less than myints
+mystack biggest than myints
+mystacks not less or equal than myints
+mystack are biggest or equal than myints

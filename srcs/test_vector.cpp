@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 14:15:56 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:48:07 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void test_vector()
 	NS::vector<int> insert_test(3, 100);
 	NS::vector<int>::iterator it;
 
+
 	it = insert_test.begin();
 	it = insert_test.insert(it, 200);
 
@@ -182,13 +183,13 @@ void test_vector()
 	// "it" no longer valid, get a new one:
 	it = insert_test.begin();
 
-	// NS::vector<int> anothervector(2, 400);
-	// insert_test.insert(it + 2, anothervector.begin(), anothervector.end());
+	NS::vector<int> anothervector(2, 400);
+	insert_test.insert(it + 2, anothervector.begin(), anothervector.end());
 
-	// int myarray[] = {501, 502, 503};
-	// insert_test.insert(insert_test.begin(), myarray, myarray + 3);
+	int myarray[] = {501, 502, 503};
+	insert_test.insert(insert_test.begin(), myarray, myarray + 3);
 
-	std::cout << "myvector contains:";
+	std::cout << "test insert vector after insert , insertfill and insert range, contains:";
 	for (it = insert_test.begin(); it < insert_test.end(); it++)
 		std::cout << ' ' << *it;
 	std::cout << '\n';
