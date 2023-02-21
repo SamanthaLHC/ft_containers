@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: samantha <samantha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/20 19:19:30 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/21 12:38:27 by samantha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ namespace ft
 	class vector
 	{
 		//============//
-	public:
+			public:
 		//============//
 
 		//______________Member type________________________________________________
 
-		typedef T value_type;
-		typedef Allocator allocator_type;
-		typedef typename std::size_t size_type;
-		typedef typename std::ptrdiff_t difference_type;
-		typedef T &reference;
-		typedef const T &const_reference;
-		typedef typename Allocator::pointer pointer;
-		typedef typename Allocator::const_pointer const_pointer;
-		typedef T *iterator;
-		typedef const T *const_iterator;
-		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
-		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef T												value_type;
+		typedef Allocator 										allocator_type;
+		typedef typename std::size_t 							size_type;
+		typedef typename std::ptrdiff_t 						difference_type;
+		typedef T&												reference;
+		typedef const T&										const_reference;
+		typedef typename Allocator::pointer						pointer;
+		typedef typename Allocator::const_pointer 				const_pointer;
+		typedef T*												iterator;
+		typedef const T*										const_iterator;
+		typedef typename ft::reverse_iterator<iterator> 		reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator> 	const_reverse_iterator;
 
 		//______________Constructors and destructor_________________________________
 
@@ -316,18 +316,33 @@ namespace ft
 			return position;
 		}
 
-		// //fill
-		// void insert (iterator position, size_type n, const value_type& val)
-		// {
-
-		// }
+		//fill
+		void insert (iterator position, size_type n, const value_type& val)
+		{
+			size_type dist = position - this->begin();
+			if (this->_capacity == 0)
+				reserve (1);
+			if (this->_n == this->_capacity)
+				reserve(this->_n * 2);
+			iterator mv = this->end();
+			position = this->begin() + dist;
+			while (mv != position)
+			{
+				this->_alloc.construct(mv, *(mv - 1));
+				this->_alloc.destroy(mv - 1);
+				mv--;
+			}
+			this->_alloc.construct(position, val);
+			this->_n++;
+			return position;
+		}
 
 		// //range
-		// template <class InputIterator>
-		// void insert (iterator position, InputIterator first, InputIterator last)
-		// {
-
-		// }
+		template <class InputIterator>
+		void insert (iterator position, InputIterator first, InputIterator last)
+		{
+			size_type range = std::distance(first, last);
+		}
 
 		// delete one element at the pos position
 		iterator erase(iterator position)
@@ -381,7 +396,7 @@ namespace ft
 		}
 
 		//============//
-	private:
+			private:
 		//============//
 
 		Allocator _alloc;
