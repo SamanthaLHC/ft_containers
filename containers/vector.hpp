@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/21 17:14:53 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:28:49 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ namespace ft
 			size_type dist = position - this->begin();
 			if (this->_capacity == 0)
 				reserve (1);
-			if (this->_n == this->_capacity)
+			if (this->_n + 1 > this->_capacity)
 				reserve(this->_n * 2);
 			iterator mv = this->end();
 			position = this->begin() + dist;
@@ -321,7 +321,7 @@ namespace ft
 			size_type size = this->_n + n;
 			if (this->_capacity == 0)
 				reserve (1);
-			if (size <= this->_capacity)
+			if (size > this->_capacity)
 				reserve(size * 2);
 			iterator it = this->end() - 1;
 			position = this->begin() + dist;
@@ -346,7 +346,7 @@ namespace ft
 			size_type size = this->_n + range;
 			if (this->_capacity == 0)
 				reserve (1);
-			if (size <= this->_capacity)
+			if (size > this->_capacity)
 				reserve(size * 2);
 			iterator it = this->end() - 1;
 			position = this->begin() + dist;
