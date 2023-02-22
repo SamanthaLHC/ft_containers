@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 11:28:49 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:06:48 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ namespace ft
 
 		void pop_back()
 		{
-			this->_alloc.destroy(this->end() - 2);
+			this->_alloc.destroy(this->end() - 1);
 			this->_n--;
 		}
 

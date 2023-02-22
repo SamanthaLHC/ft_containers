@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 11:33:19 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:56:31 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void test_vector()
 	// for (NS::vector<int>::iterator it = third.begin(); it != third.end(); it++)
 	// 	std::cout << *it << std::endl;
 
-	NS::vector<std::string> test_str;
-	test_str.push_back("pouet");
-	test_str.push_back("coucou");
-	test_str.push_back("youpi");
-	test_str.push_back("oley");
-	NS::vector<std::string> range_str(test_str.begin(), test_str.end());
+	// NS::vector<std::string> test_str;
+	// test_str.push_back("pouet");
+	// test_str.push_back("coucou");
+	// test_str.push_back("youpi");
+	// test_str.push_back("oley");
+	// NS::vector<std::string> range_str(test_str.begin(), test_str.end());
 	// std::cout << "range constructor filled with differents values(strings) :" << std::endl;
 	// for (NS::vector<std::string>::iterator it = range_str.begin(); it != range_str.end(); it++)
 	// 	std::cout << *it << std::endl;
@@ -139,7 +139,7 @@ void test_vector()
 	//							test modifier
 	/*=============================================================================*/
 
-	// // ___________________________________-pop_back:
+	// ___________________________________-pop_back:
 
 	// std::cout << "test pop back:" << std::endl;
 	// std::cout << "size before pop: " << second.size() << std::endl;
@@ -157,7 +157,30 @@ void test_vector()
 	// 	std::cout << *(second.begin() + i) << std::endl;
 	// std::cout << "size after push: " << second.size() << std::endl;
 
-	// // ___________________________________-clear:
+	NS::vector<std::string> vt(8);
+	NS::vector<std::string> vt2;
+	NS::vector<std::string>::iterator iter = vt.begin();
+
+	for (unsigned long int i = 0; i < vt.size(); ++i)
+		iter[i] = std::string((vt.size() - i), i + 65);
+	std::cout << vt.size() << std::endl;
+
+	std::cout << "push_back():\n" << std::endl;
+
+	vt.push_back("One long string");
+	vt2.push_back("Another long string");
+
+	std::cout << vt.size() << std::endl;
+
+	std::cout << vt2.size() << std::endl;
+
+	vt.pop_back();
+	vt2.pop_back();
+
+	std::cout << vt.size() << std::endl;
+	std::cout << vt2.size() << std::endl;
+
+	// ___________________________________-clear:
 
 	// std::cout << "test clear: print vector before clearing: " << std::endl;
 	// for (size_t i = 0; i < forth.size(); i++)
@@ -171,60 +194,60 @@ void test_vector()
 
 	//_____________________________________-insert:
 
-	NS::vector<int> insert_test(3, 100);
-	NS::vector<int>::iterator it;
+	// NS::vector<int> insert_test(3, 100);
+	// NS::vector<int>::iterator it;
 
-	it = insert_test.begin();
-	it = insert_test.insert(it, 200);
+	// it = insert_test.begin();
+	// it = insert_test.insert(it, 200);
 
-	insert_test.insert(it, 2, 300);
+	// insert_test.insert(it, 2, 300);
 
-	// "it" no longer valid, get a new one:
-	it = insert_test.begin();
+	// // "it" no longer valid, get a new one:
+	// it = insert_test.begin();
 
-	NS::vector<int> anothervector(2, 400);
-	insert_test.insert(it + 2, anothervector.begin(), anothervector.end());
+	// NS::vector<int> anothervector(2, 400);
+	// insert_test.insert(it + 2, anothervector.begin(), anothervector.end());
 
-	int myarray[] = {501, 502, 503};
-	insert_test.insert(insert_test.begin(), myarray, myarray + 3);
+	// int myarray[] = {501, 502, 503};
+	// insert_test.insert(insert_test.begin(), myarray, myarray + 3);
 
-	std::cout << "test insert vector after insert , insertfill and insert range, contains:";
-	for (it = insert_test.begin(); it < insert_test.end(); it++)
-		std::cout << ' ' << *it;
-	std::cout << '\n';
+	// std::cout << "test insert vector after insert , insertfill and insert range, contains:";
+	// for (it = insert_test.begin(); it < insert_test.end(); it++)
+	// 	std::cout << ' ' << *it;
+	// std::cout << '\n';
 
 
-	NS::vector<int> vec(10);
-	NS::vector<int> vec2;
-	NS::vector<int>	vec3;
+	// NS::vector<int> vec(10);
+	// NS::vector<int> vec2;
+	// NS::vector<int>	vec3;
 	
-	for (unsigned long int i = 0; i < vec.size(); ++i)
-		vec[i] = (vec.size() - i) * 3;
-	std::cout << vec.size() << std::endl;
+	// for (unsigned long int i = 0; i < vec.size(); ++i)
+	// 	vec[i] = (vec.size() - i) * 3;
+	// std::cout << vec.size() << std::endl;
 
-	vec2.insert(vec2.end(), 42);
-	vec2.insert(vec2.begin(), 2, 21);
-	std::cout << vec2.size() << std::endl;
+	// vec2.insert(vec2.end(), 42);
+	// vec2.insert(vec2.begin(), 2, 21);
+	// std::cout << vec2.size() << std::endl;
 
-	vec2.insert(vec2.end() - 2, 42);
-	std::cout << vec2.size() << std::endl;
+	// vec2.insert(vec2.end() - 2, 42);
+	// std::cout << vec2.size() << std::endl;
 
-	vec2.insert(vec2.end(), 2, 84);
-	std::cout << vec2.size() << std::endl;
+	// vec2.insert(vec2.end(), 2, 84);
+	// std::cout << vec2.size() << std::endl;
 
-	vec2.resize(4);
-	std::cout << vec2.size() << std::endl;
+	// vec2.resize(4);
+	// std::cout << vec2.size() << std::endl;
 
-	vec2.insert(vec2.begin() + 2, vec.begin(), vec.end());
-	vec.clear();
-	std::cout << vec2.size() << std::endl;
+	// vec2.insert(vec2.begin() + 2, vec.begin(), vec.end());
+	// vec.clear();
+	// std::cout << vec2.size() << std::endl;
 
-	std::cout << vec.size() << std::endl;
+	// std::cout << vec.size() << std::endl;
 
-	for (int i = 0; i < 5; ++i)
-		vec3.insert(vec3.end(), i);
-	vec3.insert(vec3.begin() + 1, 2, 111);
-	std::cout << vec3.size() << std::endl;
+	// for (int i = 0; i < 5; ++i)
+	// 	vec3.insert(vec3.end(), i);
+	// vec3.insert(vec3.begin() + 1, 2, 111);
+	// std::cout << vec3.size() << std::endl;
 
 
 	
@@ -262,57 +285,57 @@ void test_vector()
 
 	// //_____________________________________-assign
 
-	NS::vector<char> characters;
-	NS::vector<int> two;
+	// NS::vector<char> characters;
+	// NS::vector<int> two;
 	  
-	characters.assign(5, 'a');
-	const std::string extra(6, 'b');
-	characters.assign(extra.begin(), extra.end());
-	for (NS::vector<std::string>::iterator it = range_str.begin(); it != range_str.end(); it++)
-		std::cout << *it << std::endl;
+	// characters.assign(5, 'a');
+	// const std::string extra(6, 'b');
+	// characters.assign(extra.begin(), extra.end());
+	// for (NS::vector<std::string>::iterator it = range_str.begin(); it != range_str.end(); it++)
+	// 	std::cout << *it << std::endl;
 
-	int mynts[] = {1776, 7, 4};
-	two.assign(mynts, mynts + 3); // assigning from array.
+	// int mynts[] = {1776, 7, 4};
+	// two.assign(mynts, mynts + 3); // assigning from array.
 
-	std::cout << "Size of first: " << int(characters.size()) << '\n';
-	std::cout << "Size of second: " << int(two.size()) << '\n';
-
-
-	NS::vector<int> vct(7);
-	NS::vector<int> vct_two(4);
-	NS::vector<int> vct_three;
-	NS::vector<int> vct_four;
-
-	for (unsigned long int i = 0; i < vct.size(); ++i)
-		vct[i] = (vct.size() - i) * 3;
-	for (unsigned long int i = 0; i < vct_two.size(); ++i)
-		vct_two[i] = (vct_two.size() - i) * 5;
-	std::cout << vct.size() << std::endl;
-	std::cout << vct_two.size() << std::endl;
-
-	vct_three.assign(vct.begin(), vct.end());
-	vct.assign(vct_two.begin(), vct_two.end());
-	vct_two.assign(2, 42);
-	vct_four.assign(4, 21);
-
-	// std::cout << "\t### After assign(): ###" << std::endl;
-
-	std::cout << vct.size() << std::endl;
-	std::cout << vct_two.size() << std::endl;
-	std::cout << vct_three.size() << std::endl;
-	std::cout << vct_four.size() << std::endl;
+	// std::cout << "Size of first: " << int(characters.size()) << '\n';
+	// std::cout << "Size of second: " << int(two.size()) << '\n';
 
 
-	vct_four.assign(6, 84);
-	std::cout << vct_four.size() << std::endl;
+	// NS::vector<int> vct(7);
+	// NS::vector<int> vct_two(4);
+	// NS::vector<int> vct_three;
+	// NS::vector<int> vct_four;
 
-	std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+	// for (unsigned long int i = 0; i < vct.size(); ++i)
+	// 	vct[i] = (vct.size() - i) * 3;
+	// for (unsigned long int i = 0; i < vct_two.size(); ++i)
+	// 	vct_two[i] = (vct_two.size() - i) * 5;
+	// std::cout << vct.size() << std::endl;
+	// std::cout << vct_two.size() << std::endl;
 
-	vct.assign(5, 53);
-	vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+	// vct_three.assign(vct.begin(), vct.end());
+	// vct.assign(vct_two.begin(), vct_two.end());
+	// vct_two.assign(2, 42);
+	// vct_four.assign(4, 21);
 
-	std::cout << vct.size() << std::endl;
-	std::cout << vct_two.size() << std::endl;
+	// // std::cout << "\t### After assign(): ###" << std::endl;
+
+	// std::cout << vct.size() << std::endl;
+	// std::cout << vct_two.size() << std::endl;
+	// std::cout << vct_three.size() << std::endl;
+	// std::cout << vct_four.size() << std::endl;
+
+
+	// vct_four.assign(6, 84);
+	// std::cout << vct_four.size() << std::endl;
+
+	// std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+	// vct.assign(5, 53);
+	// vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
+	// std::cout << vct.size() << std::endl;
+	// std::cout << vct_two.size() << std::endl;
 
 	/*=============================================================================*/
 	//				test relationnal operators
