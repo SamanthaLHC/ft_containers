@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 15:15:08 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 15:56:37 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:22:45 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ namespace ft
 		template <class U> 
 		reverse_iterator &operator=(const reverse_iterator<U>& other)
 		{
-			this->current = other.current;
+			this->current = other.base();
 			return *this;
 		}
 
