@@ -6,7 +6,7 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 13:06:48 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:07:04 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ namespace ft
 			_alloc(alloc), _n(std::distance(first, last)), _capacity(_n + 1)
 		{
 			this->_vector_array = this->_alloc.allocate(this->_n);
-			for (size_type i = 0; i < this->_n; i++)
-				this->_alloc.construct(this->_vector_array + i, *(first + i));
+			for (size_type i = 0; i < this->_n; i++, first++)
+				this->_alloc.construct(this->_vector_array + i, *first);
 		}
 
 		vector(const vector &cpy) : _alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity),

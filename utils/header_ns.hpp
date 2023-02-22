@@ -20,5 +20,6 @@ namespace NS = ft;
 
 void test_vector();
 void test_stack();
+void test_utils();
 
 #endif

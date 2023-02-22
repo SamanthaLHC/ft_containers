@@ -9,5 +9,6 @@
 int main()
 {
 	test_vector();
+	// test_utils();
 	// test_stack();
 }

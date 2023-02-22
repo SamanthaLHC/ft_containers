@@ -6,13 +6,14 @@
 /*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 12:56:31 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:27:27 by sle-huec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include <deque>
+#include <list>
 #include "../utils/header_ns.hpp"
 
 void test_vector()
@@ -77,6 +78,135 @@ void test_vector()
 	// std::cout << "test iterators rbegin: " << *(test_str.rbegin()) << std::endl;
 	// std::cout << "test iterators rbegin + 1: " << *(test_str.rbegin() + 1) << std::endl;
 	// std::cout << "test iterators rend - 1: " << *(test_str.rend() - 1) << std::endl;
+
+	// NS::vector<int> vct;
+	// NS::vector<int>::iterator it = vct.begin();
+	// NS::vector<int>::const_iterator cit = vct.begin();
+	// NS::vector<int>::reverse_iterator rit(it);
+	// NS::vector<int>::const_reverse_iterator crit(rit);
+	// NS::vector<int>::const_reverse_iterator crit_(it);
+	// NS::vector<int>::const_reverse_iterator crit_2(cit);
+	// std::cout << "OK" << std::endl;
+
+	// std::list<int> lst;
+	// std::list<int>::iterator lst_it;
+	// for (int i = 1; i < 5; ++i)
+	// 	lst.push_back(i * 3);
+
+	// NS::vector<int> v(lst.begin(), lst.end());
+	// std::cout << v.size() << std::endl;
+
+	// lst_it = lst.begin();
+	// for (int i = 1; lst_it != lst.end(); ++i)
+	// 	*lst_it++ = i * 5;
+	// v.assign(lst.begin(), lst.end());
+	// std::cout << v.size() << std::endl;
+
+	// v.insert(v.end(), lst.rbegin(), lst.rend());
+	// std::cout << v.size() << std::endl;
+
+	const int size = 5;
+	NS::vector<int> vect(size);
+	NS::vector<int>::reverse_iterator it = vect.rbegin();
+	NS::vector<int>::const_reverse_iterator ite = vect.rbegin();
+
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
+
+	it = it + 5;
+	it = 1 + it;
+	it = it - 4;
+	std::cout << *(it += 2) << std::endl;
+	std::cout << *(it -= 1) << std::endl;
+
+	*(it -= 2) = 42;
+	*(it += 2) = 21;
+
+	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+	std::cout << "(it == const_it): " << (ite == it) << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+	
+	std::cout << vect.size() << std::endl;
+
+	// const int size = 5;
+	// TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it(vct.rbegin());
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite(vct.rend());
+
+	// for (int i = 1; it != ite; ++i)
+	// 	*it++ = (i * 7);
+	// printSize(vct, 1);
+
+	// it = vct.rbegin();
+	// ite = vct.rbegin();
+
+	// std::cout << *(++ite) << std::endl;
+	// std::cout << *(ite++) << std::endl;
+	// std::cout << *ite++ << std::endl;
+	// std::cout << *++ite << std::endl;
+
+	// it->m();
+	// ite->m();
+
+	// std::cout << *(++it) << std::endl;
+	// std::cout << *(it++) << std::endl;
+	// std::cout << *it++ << std::endl;
+	// std::cout << *++it << std::endl;
+
+	// std::cout << *(--ite) << std::endl;
+	// std::cout << *(ite--) << std::endl;
+	// std::cout << *--ite << std::endl;
+	// std::cout << *ite-- << std::endl;
+
+	// (*it).m();
+	// (*ite).m();
+
+	// std::cout << *(--it) << std::endl;
+	// std::cout << *(it--) << std::endl;
+	// std::cout << *it-- << std::endl;
+	// std::cout << *--it << std::endl;
+
+	// const int size = 5;
+	// TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_mid;
+
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
+
+	// for (int i = size; it_0 != it_1; --i)
+	// 	*it_0++ = i;
+	// printSize(vct, 1);
+	// it_0 = vct.rbegin();
+	// cit_1 = vct.rend();
+	// it_mid = it_0 + 3;
+	// cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
+
+	// std::cout << std::boolalpha;
+	// std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+
+	// std::cout << "\t\tft_eq_ope:" << std::endl;
+	// // regular it
+	// ft_eq_ope(it_0 + 3, it_mid);
+	// ft_eq_ope(it_0, it_1);
+	// ft_eq_ope(it_1 - 3, it_mid);
+	// // const it
+	// ft_eq_ope(cit_0 + 3, cit_mid);
+	// ft_eq_ope(cit_0, cit_1);
+	// ft_eq_ope(cit_1 - 3, cit_mid);
+	// // both it
+	// ft_eq_ope(it_0 + 3, cit_mid);
+	// ft_eq_ope(it_mid, cit_0 + 3);
+	// ft_eq_ope(it_0, cit_1);
+	// ft_eq_ope(it_1, cit_0);
+	// ft_eq_ope(it_1 - 3, cit_mid);
+	// ft_eq_ope(it_mid, cit_1 - 3);
+
+
+
 
 	/*=============================================================================*/
 	//							test element acces
@@ -157,28 +287,28 @@ void test_vector()
 	// 	std::cout << *(second.begin() + i) << std::endl;
 	// std::cout << "size after push: " << second.size() << std::endl;
 
-	NS::vector<std::string> vt(8);
-	NS::vector<std::string> vt2;
-	NS::vector<std::string>::iterator iter = vt.begin();
+	// NS::vector<std::string> vt(8);
+	// NS::vector<std::string> vt2;
+	// NS::vector<std::string>::iterator iter = vt.begin();
 
-	for (unsigned long int i = 0; i < vt.size(); ++i)
-		iter[i] = std::string((vt.size() - i), i + 65);
-	std::cout << vt.size() << std::endl;
+	// for (unsigned long int i = 0; i < vt.size(); ++i)
+	// 	iter[i] = std::string((vt.size() - i), i + 65);
+	// std::cout << vt.size() << std::endl;
 
-	std::cout << "push_back():\n" << std::endl;
+	// std::cout << "push_back():\n" << std::endl;
 
-	vt.push_back("One long string");
-	vt2.push_back("Another long string");
+	// vt.push_back("One long string");
+	// vt2.push_back("Another long string");
 
-	std::cout << vt.size() << std::endl;
+	// std::cout << vt.size() << std::endl;
 
-	std::cout << vt2.size() << std::endl;
+	// std::cout << vt2.size() << std::endl;
 
-	vt.pop_back();
-	vt2.pop_back();
+	// vt.pop_back();
+	// vt2.pop_back();
 
-	std::cout << vt.size() << std::endl;
-	std::cout << vt2.size() << std::endl;
+	// std::cout << vt.size() << std::endl;
+	// std::cout << vt2.size() << std::endl;
 
 	// ___________________________________-clear:
 

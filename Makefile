@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sam <sam@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 14:01:55 by sle-huec          #+#    #+#              #
-#    Updated: 2023/02/20 15:14:44 by sam              ###   ########.fr        #
+#    Updated: 2023/02/22 13:12:19 by sle-huec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_PATH = ./srcs/
 SRCS = $(addprefix $(SRCS_PATH), \
 		test_stack.cpp			\
 		test_vector.cpp			\
+		test_utils.cpp			\
 		main.cpp				\
 		subject_main.cpp)
 
