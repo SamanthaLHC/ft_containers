@@ -3,17 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   test_stack.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:31 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/15 14:52:58 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:06:10 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <deque>
 #include "../utils/header_ns.hpp"
-#include <vector>
+
+
+template <class T_STACK>
+void	cmp(const T_STACK &lhs, const T_STACK &rhs)
+{
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+}
 
 void test_stack()
 {
@@ -21,7 +33,7 @@ void test_stack()
 	std::cout << "		test stack                                         " << std::endl;
 	std::cout << "=============================================================================" << std::endl;
 
-	NS::stack<int, std::vector<int> > mystack;
+	NS::stack<int> mystack;
 
 	std::cout << "elements in stack: " << std::endl;
 	for (int i = 0; i < 5; ++i)
@@ -43,7 +55,7 @@ void test_stack()
 	mystack.top() -= 5;
 	std::cout << "mystack.top() after push: " << mystack.top() << '\n';
 
-	NS::stack<int, std::vector<int> > myints;
+	NS::stack<int> myints;
 	std::cout << "0. empty stack size: " << myints.size() << '\n';
 
 	for (int i = 0; i < 5; i++)
@@ -79,4 +91,38 @@ void test_stack()
 		std::cout << "mystack are biggest or equal than myints" << std::endl;
 	else
 		std::cout << "mystack not biggest or equal than myints" << std::endl;
+
+
+	NS::vector<int>	ctnr;
+
+	ctnr.push_back(21);
+	ctnr.push_back(42);
+	ctnr.push_back(1337);
+	ctnr.push_back(19);
+	ctnr.push_back(0);
+	ctnr.push_back(183792);
+
+	NS::stack<int, NS::vector<int> >	stck(ctnr);
+	NS::stack<int, NS::vector<int> >	stck2(ctnr);
+
+	cmp(stck, stck);  // 0
+	cmp(stck, stck2); // 1
+
+	stck2.push(60);
+	stck2.push(61);
+	stck2.push(62);
+
+	cmp(stck, stck2); // 2
+	cmp(stck2, stck); // 3
+
+	stck.push(42);
+
+	cmp(stck, stck2); // 4
+	cmp(stck2, stck); // 5
+
+	stck.push(100);
+
+	cmp(stck, stck2); // 6
+	cmp(stck2, stck); // 7
+
 }

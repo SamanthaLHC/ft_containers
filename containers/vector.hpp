@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sle-huec <sle-huec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/22 16:22:49 by sle-huec         ###   ########.fr       */
+/*   Updated: 2023/02/23 23:42:36 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 #include <iostream>
 #include <algorithm>
-#include "../utils/enable_if.hpp"
-#include "../utils/is_integral.hpp"
-#include "../utils/equal.hpp"
-#include "../iterators/reverse_iterator.hpp"
-#include "../utils/lexicographical_compare.hpp"
+#include "enable_if.hpp"
+#include "is_integral.hpp"
+#include "equal.hpp"
+#include "reverse_iterator.hpp"
+#include "lexicographical_compare.hpp"
 
 namespace ft
 {
@@ -57,7 +57,8 @@ namespace ft
 		// fill constructor: construct a container with n elements each one is a copy of val
 		explicit vector(size_type n, const T &val = T(), const Allocator &alloc = Allocator()) : _alloc(alloc), _n(n), _capacity(n)
 		{
-			// si allocate fail: une exception est jetée (try / catch ???)
+			if (n > this->max_size())
+				throw std::length_error("vector::reserve");
 			this->_vector_array = this->_alloc.allocate(n);
 			for (size_type i = 0; i < this->_n; i++)
 				this->_alloc.construct(this->_vector_array + i, val);
@@ -74,15 +75,14 @@ namespace ft
 		vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
 			InputIterator last, const allocator_type &alloc = allocator_type()) :
 			// ces variables sont const, donc modifiables uniquement à la construction
-			_alloc(alloc), _n(std::distance(first, last)), _capacity(_n + 1)
+			_alloc(alloc), _n(std::distance(first, last)), _capacity(_n)
 		{
-			this->_vector_array = this->_alloc.allocate(this->_n);
+			this->_vector_array = this->_alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_n; i++, first++)
 				this->_alloc.construct(this->_vector_array + i, *first);
 		}
 
-		vector(const vector &cpy) : _alloc(Allocator()), _n(cpy._n), _capacity(cpy._capacity),
-									_vector_array(cpy._vector_array)
+		vector(const vector &cpy) : _alloc(Allocator()), _n(0), _capacity(0), _vector_array(NULL)
 		{
 			*this = cpy;
 		}
@@ -93,7 +93,7 @@ namespace ft
 			{
 				for (size_type i = 0; i < this->_n; i++)
 					this->_alloc.destroy(this->_vector_array + i);
-				this->_alloc.deallocate(this->_vector_array, this->_n);
+				this->_alloc.deallocate(this->_vector_array, this->_capacity);
 			}
 		}
 
@@ -107,7 +107,7 @@ namespace ft
 				this->_n = rhs.size();
 				this->_capacity = rhs.capacity();
 
-				this->_vector_array = this->_alloc.allocate(this->_n);
+				this->_vector_array = this->_alloc.allocate(this->_capacity);
 				for (size_type i = 0; i < this->_n; i++)
 					this->_alloc.construct(this->_vector_array + i, rhs._vector_array[i]);
 			}
@@ -317,22 +317,39 @@ namespace ft
 		//fill
 		void insert (iterator position, size_type n, const value_type& val)
 		{
+			if (n <= 0)
+				return;
 			size_type dist = position - this->begin();
+			// std::cout << "in insert dist " <<  dist << std::endl;
 			size_type size = this->_n + n;
+			// std::cout << "size in insert " << size<< std::endl;
 			if (this->_capacity == 0)
 				reserve (1);
 			if (size > this->_capacity)
-				reserve(size * 2);
+			{
+				if (size > this->_n * 2)
+					reserve(size);
+				else
+					reserve(size * 2);
+			}	
 			iterator it = this->end() - 1;
+			// std::cout << "it is at the " << it - begin() << std::endl;
 			position = this->begin() + dist;
+			// std::cout << "position is " << position - begin() << std::endl;
 			iterator mv = (this->end() + n) - 1;
+			// std::cout << "mv is " << mv - begin() << std::endl;
 			for (; it != position - 1; it--, mv--)
 			{
+				// std::cout << "mv in for 1 is " << mv - begin() << std::endl;
+				// std::cout << "it in for  1 is " << it - begin() << std::endl;
 				this->_alloc.construct(mv, *it);
-				this->_alloc.destroy(it);
+				this->_alloc.destroy(it);			
 			}
+			mv++;
 			for (; position - 1 != mv; position++)
+			{
 				this->_alloc.construct(position, val);
+			}
 			this->_n += n;
 		}
 
@@ -342,12 +359,19 @@ namespace ft
 		 InputIterator>::type first,	InputIterator last)
 		{
 			size_type range = std::distance(first, last);
+			if (range <= 0)
+				return;
 			size_type dist = position - this->begin();
 			size_type size = this->_n + range;
 			if (this->_capacity == 0)
 				reserve (1);
 			if (size > this->_capacity)
-				reserve(size * 2);
+			{
+				if (size > this->_n * 2)
+					reserve(size);
+				else
+					reserve(size * 2);
+			}	
 			iterator it = this->end() - 1;
 			position = this->begin() + dist;
 			iterator mv = (this->end() + range) - 1;
@@ -356,6 +380,7 @@ namespace ft
 				this->_alloc.construct(mv, *it);
 				this->_alloc.destroy(it);
 			}
+			mv++;
 			for (; position - 1 != mv && first != last; position++, first++)
 				this->_alloc.construct(position, *first);
 			this->_n += range;
@@ -365,8 +390,11 @@ namespace ft
 		iterator erase(iterator position)
 		{
 			this->_alloc.destroy(position);
-			for (size_type i = 1; position + i != this->end(); i++)
-				this->_alloc.construct(position + i - 1, *(position + i));
+			for (size_type i = 0; position + i + 1 != this->end(); i++)
+			{
+				this->_alloc.construct(position + i, *(position + i + 1));
+				this->_alloc.destroy(position + i + 1);
+			}
 			this->_n--;
 			return position;
 		}
@@ -375,12 +403,12 @@ namespace ft
 		iterator erase(iterator first, iterator last)
 		{
 			size_type dist = std::distance(first, last);
+			std::cout << dist << std::endl;
 			while (dist > 0)
 			{
 				this->erase(first);
 				dist--;
 			}
-			this->_n -= dist;
 			return first;
 		}
 
@@ -398,8 +426,7 @@ namespace ft
 			{
 				for (size_type i = 0; i < this->_n; i++)
 				{
-					if (this->_vector_array[i])
-						this->_alloc.destroy(this->_vector_array + i);
+					this->_alloc.destroy(this->_vector_array + i);
 				}
 			}
 			this->_n = 0;

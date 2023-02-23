@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:45 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/16 12:51:37 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/23 13:11:51 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 		//______________Constructors and destructor________________________
 
 		// à la fois costructeur par défaut et copy constructeur
-		explicit stack(const container_type &ctnr = Container()): c(ctnr) {}
+		explicit stack(const container_type & ctnr = Container()): c(ctnr) {}
 
 		stack(const stack &cpy) : c(cpy.c) {}
 
@@ -124,7 +124,7 @@ namespace ft
 	template <class T, class Container>
 	bool operator!=(const stack<T, Container> &x, const stack<T, Container> &y)
 	{
-		return x.c != y.c;
+		return !(x.c == y.c);
 	}
 
 	template <class T, class Container>
