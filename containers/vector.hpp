@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/25 16:49:46 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/25 18:49:53 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ namespace ft
 
 	template <class T, class Allocator = std::allocator<T> >
 	class vector
-	{
+	{	
 		//============//
 			public:
 		//============//
@@ -74,12 +74,12 @@ namespace ft
 		template <class InputIterator>
 		vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
 			   InputIterator last, const allocator_type &alloc = allocator_type()) : // ces variables sont const, donc modifiables uniquement à la construction
-																					 _alloc(alloc), _n(std::distance(first, last)), _capacity(_n)
+			_alloc(alloc), _n(0), _capacity(0)
 		{
-			this->_vector_array = this->_alloc.allocate(this->_capacity);
-			for (size_type i = 0; i < this->_n; i++, first++)
-				this->_alloc.construct(this->_vector_array + i, *first);
+			this->_copy_from_input(first, last, typename ft::iterator_traits<InputIterator>::iterator_category());
 		}
+
+		
 
 		vector(const vector &cpy) : _alloc(Allocator()), _n(0), _capacity(0), _vector_array(NULL)
 		{
@@ -355,31 +355,33 @@ namespace ft
 		template <class InputIterator>
 		void insert(iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first, InputIterator last)
 		{
-			size_type range = std::distance(first, last);
-			if (range <= 0)
-				return;
-			size_type dist = position - this->begin();
-			size_type size = this->_n + range;
-			if (this->_capacity == 0)
-				reserve(1);
-			if (size > this->_capacity)
-			{
-				if (size > this->_n * 2)
-					reserve(size);
-				else
-					reserve(size * 2);
-			}
-			iterator it = this->end() - 1;
-			position = this->begin() + dist;
-			iterator mv = (this->end() + range) - 1;
-			for (; it != position - 1; it--, mv--)
-			{
-				this->_alloc.construct(mv, *it);
-				this->_alloc.destroy(it);
-			}
-			for (; position - 1 != mv && first != last; position++, first++)
-				this->_alloc.construct(position, *first);
-			this->_n += range;
+			// size_type range = std::distance(first, last);
+			// if (range <= 0)
+			// 	return;
+			// size_type dist = position - this->begin();
+			// size_type size = this->_n + range;
+			// if (this->_capacity == 0)
+			// 	reserve(1);
+			// if (size > this->_capacity)
+			// {
+			// 	if (size > this->_n * 2)
+			// 		reserve(size);
+			// 	else
+			// 		reserve(size * 2);
+			// }
+			// iterator it = this->end() - 1;
+			// position = this->begin() + dist;
+			// iterator mv = (this->end() + range) - 1;
+			// for (; it != position - 1; it--, mv--)
+			// {
+			// 	this->_alloc.construct(mv, *it);
+			// 	this->_alloc.destroy(it);
+			// }
+			// for (; position - 1 != mv && first != last; position++, first++)
+			// 	this->_alloc.construct(position, *first);
+			// this->_n += range;
+
+			this->_copy_from_input(position - this->begin(), last, typename ft::iterator_traits<InputIterator>::iterator_category());
 		}
 
 		// delete one element at the pos position
@@ -459,6 +461,27 @@ namespace ft
 		size_type _n;
 		size_type _capacity;
 		pointer _vector_array;
+
+		template <class InputIterator, class Tag>
+		void _copy_from_input(InputIterator first, InputIterator last, Tag)
+		{
+			this->_n = std::distance(first, last);
+			this->_capacity = this->_n;
+			this->_vector_array = this->_alloc.allocate(this->_capacity);
+			for (size_type i = 0; first != last; i++, first++)
+			{
+				this->_alloc.construct(this->_vector_array + i, *first);
+			}
+		}
+
+		template <class InputIterator>
+		void _copy_from_input(InputIterator first, InputIterator last, std::input_iterator_tag)
+		{
+			for (; first != last; first++)
+			{
+				push_back(*first);
+			}
+		}
 	};
 
 	template <class T, class Allocator>
