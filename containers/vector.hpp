@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/23 23:42:36 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/25 16:49:46 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 #include <iostream>
 #include <algorithm>
-#include "enable_if.hpp"
-#include "is_integral.hpp"
-#include "equal.hpp"
-#include "reverse_iterator.hpp"
-#include "lexicographical_compare.hpp"
+#include "../utils/enable_if.hpp"
+#include "../utils/is_integral.hpp"
+#include "../utils/equal.hpp"
+#include "../iterators/reverse_iterator.hpp"
+#include "../utils/lexicographical_compare.hpp"
 
 namespace ft
 {
@@ -33,18 +33,18 @@ namespace ft
 
 		//______________Member type________________________________________________
 
-		typedef T												value_type;
-		typedef Allocator 										allocator_type;
-		typedef typename std::size_t 							size_type;
-		typedef typename std::ptrdiff_t 						difference_type;
-		typedef T&												reference;
-		typedef const T&										const_reference;
-		typedef typename Allocator::pointer						pointer;
-		typedef typename Allocator::const_pointer 				const_pointer;
-		typedef T*												iterator;
-		typedef const T*										const_iterator;
-		typedef typename ft::reverse_iterator<iterator> 		reverse_iterator;
-		typedef typename ft::reverse_iterator<const_iterator> 	const_reverse_iterator;
+		typedef T value_type;
+		typedef Allocator allocator_type;
+		typedef typename std::size_t size_type;
+		typedef typename std::ptrdiff_t difference_type;
+		typedef T &reference;
+		typedef const T &const_reference;
+		typedef typename Allocator::pointer pointer;
+		typedef typename Allocator::const_pointer const_pointer;
+		typedef T *iterator;
+		typedef const T *const_iterator;
+		typedef typename ft::reverse_iterator<iterator> reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 		//______________Constructors and destructor_________________________________
 
@@ -73,9 +73,8 @@ namespace ft
 
 		template <class InputIterator>
 		vector(typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
-			InputIterator last, const allocator_type &alloc = allocator_type()) :
-			// ces variables sont const, donc modifiables uniquement à la construction
-			_alloc(alloc), _n(std::distance(first, last)), _capacity(_n)
+			   InputIterator last, const allocator_type &alloc = allocator_type()) : // ces variables sont const, donc modifiables uniquement à la construction
+																					 _alloc(alloc), _n(std::distance(first, last)), _capacity(_n)
 		{
 			this->_vector_array = this->_alloc.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_n; i++, first++)
@@ -103,10 +102,17 @@ namespace ft
 		{
 			if (this != &rhs)
 			{
+				if (this->_vector_array != NULL)
+				{
+					for (size_type i = 0; i < this->_n; i++)
+						this->_alloc.destroy(this->_vector_array + i);
+					this->_alloc.deallocate(this->_vector_array, this->_capacity);
+				}
+
 				this->_alloc = rhs.get_allocator();
 				this->_n = rhs.size();
 				this->_capacity = rhs.capacity();
-
+				
 				this->_vector_array = this->_alloc.allocate(this->_capacity);
 				for (size_type i = 0; i < this->_n; i++)
 					this->_alloc.construct(this->_vector_array + i, rhs._vector_array[i]);
@@ -175,14 +181,14 @@ namespace ft
 
 		reference at(size_type n)
 		{
-			if (n > this->_n)
+			if (n >= this->_n)
 				throw std::out_of_range("out of range exception");
 			return (this->_vector_array[n]);
 		}
 
 		const_reference at(size_type n) const
 		{
-			if (n > this->_n)
+			if (n >= this->_n)
 				throw std::out_of_range("out of range exception");
 			return (this->_vector_array[n]);
 		}
@@ -267,8 +273,10 @@ namespace ft
 		template <class InputIterator>
 		void assign(InputIterator first, InputIterator last)
 		{
+			vector<value_type> tmp(first, last);
 			erase(begin(), end());
-			insert(begin(), first, last);
+			insert(begin(), tmp.begin(), tmp.end());
+			// le destruct de tmp sera appelé à la sortie du scope
 		}
 
 		// 		//fill
@@ -294,12 +302,12 @@ namespace ft
 			this->_n--;
 		}
 
-		//single elem
-		iterator insert (iterator position, const value_type& val)
+		// single elem
+		iterator insert(iterator position, const value_type &val)
 		{
 			size_type dist = position - this->begin();
 			if (this->_capacity == 0)
-				reserve (1);
+				reserve(1);
 			if (this->_n + 1 > this->_capacity)
 				reserve(this->_n * 2);
 			iterator mv = this->end();
@@ -314,49 +322,38 @@ namespace ft
 			return position;
 		}
 
-		//fill
-		void insert (iterator position, size_type n, const value_type& val)
+		// fill
+		void insert(iterator position, size_type n, const value_type &val)
 		{
 			if (n <= 0)
 				return;
 			size_type dist = position - this->begin();
-			// std::cout << "in insert dist " <<  dist << std::endl;
 			size_type size = this->_n + n;
-			// std::cout << "size in insert " << size<< std::endl;
 			if (this->_capacity == 0)
-				reserve (1);
+				reserve(1);
 			if (size > this->_capacity)
 			{
 				if (size > this->_n * 2)
 					reserve(size);
 				else
 					reserve(size * 2);
-			}	
+			}
 			iterator it = this->end() - 1;
-			// std::cout << "it is at the " << it - begin() << std::endl;
 			position = this->begin() + dist;
-			// std::cout << "position is " << position - begin() << std::endl;
 			iterator mv = (this->end() + n) - 1;
-			// std::cout << "mv is " << mv - begin() << std::endl;
 			for (; it != position - 1; it--, mv--)
 			{
-				// std::cout << "mv in for 1 is " << mv - begin() << std::endl;
-				// std::cout << "it in for  1 is " << it - begin() << std::endl;
 				this->_alloc.construct(mv, *it);
-				this->_alloc.destroy(it);			
+				this->_alloc.destroy(it);
 			}
-			mv++;
 			for (; position - 1 != mv; position++)
-			{
 				this->_alloc.construct(position, val);
-			}
 			this->_n += n;
 		}
 
-		//range
+		// range
 		template <class InputIterator>
-		void insert (iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value),
-		 InputIterator>::type first,	InputIterator last)
+		void insert(iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first, InputIterator last)
 		{
 			size_type range = std::distance(first, last);
 			if (range <= 0)
@@ -364,14 +361,14 @@ namespace ft
 			size_type dist = position - this->begin();
 			size_type size = this->_n + range;
 			if (this->_capacity == 0)
-				reserve (1);
+				reserve(1);
 			if (size > this->_capacity)
 			{
 				if (size > this->_n * 2)
 					reserve(size);
 				else
 					reserve(size * 2);
-			}	
+			}
 			iterator it = this->end() - 1;
 			position = this->begin() + dist;
 			iterator mv = (this->end() + range) - 1;
@@ -380,7 +377,6 @@ namespace ft
 				this->_alloc.construct(mv, *it);
 				this->_alloc.destroy(it);
 			}
-			mv++;
 			for (; position - 1 != mv && first != last; position++, first++)
 				this->_alloc.construct(position, *first);
 			this->_n += range;
@@ -403,7 +399,6 @@ namespace ft
 		iterator erase(iterator first, iterator last)
 		{
 			size_type dist = std::distance(first, last);
-			std::cout << dist << std::endl;
 			while (dist > 0)
 			{
 				this->erase(first);
@@ -432,14 +427,14 @@ namespace ft
 			this->_n = 0;
 		}
 
-		//ALLOC_____________________________________________________________________
+		// ALLOC_____________________________________________________________________
 
 		allocator_type get_allocator() const
 		{
 			return allocator_type(this->_alloc);
 		}
 
-		//FRIENDSHIP_______________________________________________________________
+		// FRIENDSHIP_______________________________________________________________
 
 		template <class Tx, class AllocatorX>
 		friend bool operator==(const vector<Tx, AllocatorX> &x, const vector<Tx, AllocatorX> &y);
