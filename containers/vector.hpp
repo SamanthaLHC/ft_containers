@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/27 17:22:51 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/27 17:39:20 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,12 @@ namespace ft
 				this->_alloc = rhs.get_allocator();
 				this->_n = rhs.size();
 				this->_capacity = rhs.capacity();
-				
-				this->_vector_array = this->_alloc.allocate(this->_capacity);
-				for (size_type i = 0; i < this->_n; i++)
-					this->_alloc.construct(this->_vector_array + i, rhs._vector_array[i]);
+				if (this->_capacity != 0)
+				{
+					this->_vector_array = this->_alloc.allocate(this->_capacity);
+					for (size_type i = 0; i < this->_n; i++)
+						this->_alloc.construct(this->_vector_array + i, rhs._vector_array[i]);
+				}
 			}
 			return *this;
 		}
