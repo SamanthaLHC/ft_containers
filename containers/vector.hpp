@@ -6,7 +6,7 @@
 /*   By: sam <sam@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:18:18 by sle-huec          #+#    #+#             */
-/*   Updated: 2023/02/25 18:49:53 by sam              ###   ########.fr       */
+/*   Updated: 2023/02/27 17:22:51 by sam              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,9 @@ namespace ft
 
 		void resize(size_type n, value_type val = value_type())
 		{
+
+			if (n > this->max_size())
+				throw std::length_error("vector::reserve");
 			if (n < this->_n)
 			{
 				while (this->_n > n)
@@ -355,33 +358,7 @@ namespace ft
 		template <class InputIterator>
 		void insert(iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first, InputIterator last)
 		{
-			// size_type range = std::distance(first, last);
-			// if (range <= 0)
-			// 	return;
-			// size_type dist = position - this->begin();
-			// size_type size = this->_n + range;
-			// if (this->_capacity == 0)
-			// 	reserve(1);
-			// if (size > this->_capacity)
-			// {
-			// 	if (size > this->_n * 2)
-			// 		reserve(size);
-			// 	else
-			// 		reserve(size * 2);
-			// }
-			// iterator it = this->end() - 1;
-			// position = this->begin() + dist;
-			// iterator mv = (this->end() + range) - 1;
-			// for (; it != position - 1; it--, mv--)
-			// {
-			// 	this->_alloc.construct(mv, *it);
-			// 	this->_alloc.destroy(it);
-			// }
-			// for (; position - 1 != mv && first != last; position++, first++)
-			// 	this->_alloc.construct(position, *first);
-			// this->_n += range;
-
-			this->_copy_from_input(position - this->begin(), last, typename ft::iterator_traits<InputIterator>::iterator_category());
+			_insert_range_copy(position, first, last, typename ft::iterator_traits<InputIterator>::iterator_category());
 		}
 
 		// delete one element at the pos position
@@ -480,6 +457,48 @@ namespace ft
 			for (; first != last; first++)
 			{
 				push_back(*first);
+			}
+		}
+
+		template <class InputIterator, class Tag>
+		void _insert_range_copy(iterator position, InputIterator first, InputIterator last, Tag)
+
+		{
+			size_type range = std::distance(first, last);
+			if (range <= 0)
+				return;
+			size_type dist = position - this->begin();
+			size_type size = this->_n + range;
+			if (this->_capacity == 0)
+				reserve(1);
+			if (size > this->_capacity)
+			{
+				if (size > this->_n * 2)
+					reserve(size);
+				else
+					reserve(size * 2);
+			}
+			iterator it = this->end() - 1;
+			position = this->begin() + dist;
+			iterator mv = (this->end() + range) - 1;
+			for (; it != position - 1; it--, mv--)
+			{
+				this->_alloc.construct(mv, *it);
+				this->_alloc.destroy(it);
+			}
+			for (; position - 1 != mv && first != last; position++, first++)
+				this->_alloc.construct(position, *first);
+			this->_n += range;
+		}
+
+		template <class InputIterator>
+		void _insert_range_copy(iterator position, InputIterator first, InputIterator last, std::input_iterator_tag)
+		{
+			for (; first != last; first++, position++)
+			{
+				size_type dist = position - this->begin();
+				insert(position, *first);
+				position = this->begin() + dist;
 			}
 		}
 	};
